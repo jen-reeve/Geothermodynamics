@@ -1,0 +1,137 @@
+---
+title: "Geothermodynamics"
+author: "Jennifer Reeve"
+date: "August 28, 2018"
+output: pdf_document
+header-includes:
+  \usepackage{chemformula}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Class notes
+## Aug 27 2018
+R$\rightleftharpoons$ P
+
+$[\frac{^{34}S}{^{32}S}]_{reactant}/[\frac{^{34}S}{^{32}S}]_{product}=^{34}\alpha_{R,P}$ aka the fractionation factor
+
+$^{34}\alpha_{R,P}=(^{34}\alpha^{EQ}_{R,P}- ^{34}\alpha^{Kin}_{R,P})\frac{\phi_{P,R}}{\phi_{R,P}}+ ^{34}\alpha^{Kin}_{R,P}$
+
+Where $\frac{\phi_{P,R}}{\phi_{R,P}}$ represents the back reaction (numerator) divided by the forward reaction (denominator). It is also true that $\frac{\phi_{P,R}}{\phi_{R,P}}=e^{\frac{\Delta G_r}{RT}}$.
+
+## Aug 29 2018
+Thermodynamics terms:
+
+### System:
+  i) observer defined, separate from the rest of the universe (ROU)
+  ii) nature of the boundary between the system and the ROU defines the system type
+    a. open: mass and energy can cross the boundary. Example: hydrothermal ore system
+    b. closed: energy may cross but not mass
+    c. adiabatic: no heat energy may cross. Example: developing clouds or ascending magma
+    d. isolated: neither heat nor mass may cross
+    
+Can think of a system as a collection of phases (see below)
+
+### Phase:
+substance with uniform chemical and physical properties or properties that smoothly vary
+
+  i) minerals: each type is a potential phase
+  ii) liquids: silicate melts, aqueous solutions, glasses
+  iii) gases:
+  iv) fluids: gas/liquid above a "critical" point
+  
+most phases we encounter are solutions with varying chemical compositions, not pure solutions.
+
+example: plagioclase feldspar: imagine that the green in the image is anorithite (Ca-rich feldspar) and the red is albite (Na-rich feldspar)
+
+![Gradient of phases](gradient.png)
+
+### Components
+chemical formula used to describe the composition of a phase
+
+example: alkaline feldspar (f$_{sp}$)
+
+Composition: Na$_{0.5}$K$_{0.5}$AlSi$_3$O$_8$
+
+Components: can use different units, below are three versions of the same information, typically we choose the option with the smallest number of components (aka the last option here)
+
+|Element|Atom \%|
+|:------|:------|
+|  Na   | 3.85  |
+|   K   | 3.85  |
+|  Al   | 7.70  |
+|  Si   | 23.08 |
+|   O   | 61.54 |
+
+|Oxides|Mol \%|
+|:-----|:-----|
+|\ch{K2O}| 6.25 |
+|\ch{Na2O}| 6.25|
+|\ch{Al2O2}|12.50|
+|\ch{SiO2}|75.00|
+
+|f$_{sp}$ molecules|mol \%|
+|:---------------|:-----|
+|\ch{KAlSi3O8}  |50    |
+|\ch{NaAlSi3O8} |50    |
+
+\textit{Aside:} Why do we care about feldspar? It makes white rocks white (with quartz), but Peter says green rocks are the most important
+
+### Variables
+refers to the chemical or physical characteristics of a phase or system
+
+examples: temperature (T), pressure (P), composition, density ($\rho$), chemical potential ($\mu$), fugacity, activity
+
+variables come in two flavors:
+1. intensive: independent of the amount of material present
+  i) examples: T, P, $\mu$
+2. extensive: dependent on the amount of material present
+  i) examples: mass, volume, total heat capacity
+  ii) typically 1st order dependencies
+  
+The ratio of two extensive variables is an intensive variable because the 1st order dependencies cancel. Example: $\rho=m/v$
+
+### State
+Ensemble of values for all relevant variables describing a phase or a system
+
+relevant variables = state variables
+
+Equation of State is the explicit representation of the mathematical relationship between the variables of a particular phase or system
+
+Example: ideal gas law $PV=nRT$
+
+### Equilibrium
+a system is at equilibrium if all the variables that describe its state do not change with time (scale depends on the question)
+
+Types of equilibrium (essentially defined by its response to a small pertubation):
+1. stable equilibrium: returns to initial state after small pertubation
+2. unstable equilibrium: does not return to initial state after small pertubation (not very relevant to real world)
+3. metastable equilibrium: returns to initial state after a sufficiently small pertubation
+4. conditional equilibrium (neutrally stable): doesn't care about pertubations (not very relevant to real world)
+
+![Mechanical Analogy for Equilibrium States](equilibrium_states.jpg)
+
+First order derivative for all of these states is the same (0)
+
+# Definitions
+Component:
+
+Equilibrium: 
+
+Fractionation Factor: $^x\alpha_{A/B}=R^x_{A}/R^x_{B}=(^x\alpha^{Eq}_{A/B}-^x\alpha^{Kin}_{A/B})\frac{\phi_{B/A}}{\phi_{A/B}}+^x\alpha^{Kin}_{A/B}$ where A and B are two compounds (reactant/product etc)
+
+Isotope Ratio: $R^{x}=\frac{^xA}{^yA}$ where $x$ is the rare isotope of the element $A$ and $y$ is the common isotope
+
+Phase:
+
+State: Ensemble of values for all relevant variables describing a phase or a system
+
+State variable: relevant variables for describing a phase or system
+
+System: 
+
+Variable: refers to the chemical or physical characteristics of a phase or system
+
+$\frac{\phi_{B/A}}{\phi_{A/B}}=e^{\frac{\Delta G_r}{RT}}$
