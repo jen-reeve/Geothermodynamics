@@ -116,21 +116,21 @@ Types of equilibrium (essentially defined by its response to a small pertubation
 First order derivative for all of these states is the same (0)
 
 # Definitions
-Component:
+Component: chemical formula used to describe the composition of a phase
 
-Equilibrium: 
+Equilibrium: a system is at equilibrium if all the variables that describe its state do not change with time
 
 Fractionation Factor: $^x\alpha_{A/B}=R^x_{A}/R^x_{B}=(^x\alpha^{Eq}_{A/B}-^x\alpha^{Kin}_{A/B})\frac{\phi_{B/A}}{\phi_{A/B}}+^x\alpha^{Kin}_{A/B}$ where A and B are two compounds (reactant/product etc)
 
 Isotope Ratio: $R^{x}=\frac{^xA}{^yA}$ where $x$ is the rare isotope of the element $A$ and $y$ is the common isotope
 
-Phase:
+Phase: substance with uniform chemical and physical properties or properties that smoothly vary
 
 State: Ensemble of values for all relevant variables describing a phase or a system
 
 State variable: relevant variables for describing a phase or system
 
-System: 
+System: A defined set of area/mass/energy separate from the rest of the universe, can be considered a collection of phases
 
 Variable: refers to the chemical or physical characteristics of a phase or system
 
