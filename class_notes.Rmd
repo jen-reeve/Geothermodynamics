@@ -115,18 +115,119 @@ Types of equilibrium (essentially defined by its response to a small pertubation
 
 First order derivative for all of these states is the same (0)
 
+## Aug 31 2018:
+Thermodynamics doesn't care how you get there, just where you start and where you end
+
+### Thermodynamics thought experiment: Flagstaff to Benson
+What is the system: you! on top of Flagstaff Mountain (elevation 7000 ft)
+
+There is a lot of wind, so T is constant
+
+And we are carrying around bananas to replenish our energy, so don't worry about that
+
+Pick a path from Flagstaff Mountain to Benson Earth Sciences Building and figure out the change in energy!
+
+We care about potential energy in this scenario: $E_p\sim\rho gh$
+
+Density ($\rho$) is constant (we aren't gaining/losing weight) and gravity ($g$) is constant as far as we care. So the change in energy is dependent on the change in elevation ($h$): $\Delta E_p=\Delta h=h_{Benson}-h_{Flagstaff}=5366-7000=-1634ft$
+
+It doesn't matter if you go other places on the way from Flagstaff to Benson, or if you have to cross a ridge to get down to Benson, all of these intermediate stops will cancel out.
+
+This is a state function.
+
+### State functions
+State functions only depend on the initial and final state (1st characterization of state function)
+
+$\int_{z_0}^{z_1}dz=z_1-z_0$ (2nd characterization of state function)
+
+We are taking the definite integral $\int^{z_1}_{z_0}$ of a total or exact differential $dz$
+
+The definition of a total or exact differential is that when you integrate it the answer is path independent
+
+Path independence: doesn't matter how you get from initial state to final state
+
+State functions are cyclic, if you go from A to B and then B to A there is no net change: $\int^{z_1}_{z_0}dz+\int^{z_0}_{z_1}dz=0$
+
+State function: $z(x,y)$ so what's the differential? $dz=f(dx,dy)=(\frac{\partial z}{\partial x})_ydx+(\frac{\partial z}{\partial y})_xdy$ where $(\frac{\partial z}{\partial x})_y$ is the partial differential, meaning that you are looking at the change in $z$ given a change in $x$ while holding $y$ constant.
+
+#### Example: Ideal gas law
+$PV=nRT$ ideal gas law aka the equation of state you didn't know you knew
+
+Let's find the equation for the volume and final the total differential: $V=\frac{nRT}{P}$
+
+Volume is an extensive variable (it depends on the amount of stuff, if you add more stuff you add more volume) so we have 3 variables in this function: $n$, $T$, and $P$ and $R$ is always a constant (by definition)
+
+Using our simplied differential function above: $dV=(\frac{\partial V}{\partial n})_{T,P}dn+(\frac{\partial V}{\partial T})_{n,P}dT+(\frac{\partial V}{\partial P})_{n,T}dP$
+
+Let's break it down a little more: if we take the partial differential of the volume with respect to the number of moles holding temperature and pressure constant (first term from above), we can replace the partial of volume with our definition of volume, $V=\frac{nRT}{P}$, and then remove the constants from the partial of this equation. This leaves us with the partial differential of the number of moles, divided by the partial differential of the number of moles, which is 1. Thus the partial differential of volume with respect to the number of moles holding temperature and pressure constant is simply equal to $\frac{RT}{P}$
+
+$(\frac{\partial V}{\partial n})_{T,P}=(\frac{\partial[\frac{nRT}{P}]}{\partial n})_{T,P}=\frac{RT}{P}(\frac{\partial n}{\partial n})=\frac{RT}{P}$
+
+Let's repeat for the other two (without the long version):
+
+$(\frac{\partial V}{\partial T})_{n,P}=(\frac{\partial[\frac{nRT}{P}]}{\partial T})_{n,P}=\frac{nR}{P}(\frac{\partial T}{\partial T})=\frac{nR}{P}$
+
+And the tricky one:
+
+$(\frac{\partial V}{\partial P})_{n,T}=(\frac{\partial[\frac{nRT}{P}]}{\partial P})_{n,T}=nRT(\frac{\partial \frac{1}{P}}{\partial P})=nRT(-P^{-2})$
+
+Remembering differential rule: $\frac{\partial x^n}{\partial x}=nx^{n-1}$
+
+The definition of volume we've been using, $V=\frac{nRT}{P}$ is extensive. If we increase $n$ by $k$, $T$ by $k$ and $P$ by $k$ we get: $V_k=\frac{knRkT}{kP}=\frac{k^2}{k}\frac{nRT}{P}=k\frac{nRT}{P}=kV_0$
+
+If we define $\bar{V}=\frac{V}{n}=\frac{RT}{P}$ then we have an intensive variable (the ratio of two extensive variables is an intensive variable), so now if we increase all of the variables ($T$ and $P$) by $k$ we get: $\bar{V}_k=\frac{RkT}{kP}=\frac{k}{k}\frac{RT}{P}=\frac{RT}{P}$
+
+This leads to the second test for exactness: the differential should be commutative (the order of differentiation shouldn't matter)
+
+$\frac{\partial(\frac{\partial\bar{V}}{\partial T})}{\partial P}=\frac{\partial(\frac{\partial\bar{V}}{\partial P})}{\partial T}$
+
+And now we get the fourth characterization of state functions.
+
+If any of the characterizations of a state function is true, all of them are true, so you only need to prove it once.
+
+## Sep 5 2018
+We are going to take the concepts and properties and start to develop laws of thermodynamics, with the intention of getting to the point where we can isolate the effects of chemical work on a system.
+
+Mathematical criterion for equilibrium using a mechanical analogy: Gravitational potential energy (GPE)
+
+![Mechanical Analogy for Equilibrium States](equilibrium_states.jpg)
+
+Again the slope for all of these cases is 0. The definition of equilibrium is $\frac{dh}{dx}=0$ at equilibrium.
+
+$GPE\sim\rho g h$ so $\frac{d(GPE)}{dx}=\frac{d(\rho gh)}{dx}$ but $\rho g$ is constant so $\frac{d(\rho gh)}{dx}=\rho g\frac{dh}{dx}=0$ at equilibrium. So $d(GPE)=0$
+
+Thermodynamics is based on a single assumption that can be expressed several ways:
+
+1. energy can neither be created nor destroyed
+2. all forms of energy are interconvertible
+3. each definite state of a definite system is characterized by a definite energy
+4. can't get something for nothing
+
+
+## Sep 7 2018
+
+## Sep 10 2018
+
+## Sep 12 2018
+
 # Definitions
 Component: chemical formula used to describe the composition of a phase
 
 Equilibrium: a system is at equilibrium if all the variables that describe its state do not change with time
 
+Exact differential (aka total differential): a differential that when integrated is path independent
+
 Fractionation Factor: $^x\alpha_{A/B}=R^x_{A}/R^x_{B}=(^x\alpha^{Eq}_{A/B}-^x\alpha^{Kin}_{A/B})\frac{\phi_{B/A}}{\phi_{A/B}}+^x\alpha^{Kin}_{A/B}$ where A and B are two compounds (reactant/product etc)
 
 Isotope Ratio: $R^{x}=\frac{^xA}{^yA}$ where $x$ is the rare isotope of the element $A$ and $y$ is the common isotope
 
+Path independence: it doesn't matter how you get from the initial to the final state, only the difference between these states
+
 Phase: substance with uniform chemical and physical properties or properties that smoothly vary
 
 State: Ensemble of values for all relevant variables describing a phase or a system
+
+State function: function depending only on the initial and final states, it is path independent and cyclic
 
 State variable: relevant variables for describing a phase or system
 
