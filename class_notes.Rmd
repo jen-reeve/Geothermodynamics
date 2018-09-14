@@ -254,7 +254,34 @@ We can't know a priori how to integrate $\delta Q$ or $\delta W$. a priori don't
 Need to transform these into integrateable forms (alternatively we need to transform energetic changes into a form that relies on easily measured variables).
 
 ## Sep 7 2018
-Thought experiment: assume that the system is at the same temperature for all time. Have a 
+Thought experiment: assume that the system is at the same temperature for all time. $dl$ here is small enough that the pressure remains constant. We can move the piston by $dl$ by applying a force to the piston.
+
+![Mechanical Piston Example](mechanical_example.jpg)
+
+$\delta W=-P*A*dl$ where $A*dl=dV$ so $\delta W=-PdV$ which we can rearrange to $\frac{\delta W}{P}=d(-V)$ normalizing by $P$ makes this into an exact differential that we can integrate.
+
+Scientific thermodynamic convention: $\delta W$ has a positive value when work is done on a (actually to) the system. $P$ always takes on a positive value, work done on the system decreases volume and our sign convention accounts for this.
+
+Process: the act of adding or extracting energy from its system
+
+Reversible: (cylinder thought experiment) if the process is stopped at any time, the state of the system does not change. Reversible processes are series of equilibrium states
+
+Irreversible: when the process is stopped, further changes to the state of the system occur.
+
+|Reversible|Irreversible|
+|<---------|<-----------|
+|idealization|reality|
+|well developed coherent theory|complicated and splintered theory|
+|theory applicable b/c relevant lab data exists|lab data doesn't yet exist|
+|good for geologic time. rocks tend to act like a state| |
+
+$\frac{\delta W}{P}=d(-V)$ is only for a reversible process
+
+In general, the work done on a system will be greater than in our thought experiment. (throw a big rock onto a piston vs tiny particles). $\therefore \delta W \geq -PdV$
+
+During a reversible process:
+
+
 
 ## Sep 10 2018
 
