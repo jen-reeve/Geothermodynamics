@@ -5,6 +5,7 @@ date: "August 28, 2018"
 output: pdf_document
 header-includes:
   \usepackage{chemformula}
+  \usepackage{amsmath}
 ---
 
 ```{r setup, include=FALSE}
@@ -203,8 +204,57 @@ Thermodynamics is based on a single assumption that can be expressed several way
 3. each definite state of a definite system is characterized by a definite energy
 4. can't get something for nothing
 
+Gibbs' contribution was taking this and converting into a mathematical statement
+
+relationships implied by these statements, to illustrate let's say: let there be a property of a system called the internal energy ($U$). Let $U$ of the system under consideration be a function of the state variables ($x,y,z,...$) such that $U(x,y,z,...)$
+
+1. $U(x,y,z,...)$ is fully characterized by the state of the system. This means if we can know $x,y,z,...$ we can then know $U$
+2. $U_{system}=\Sigma U_{parts}$
+3. $\int^{U_2}_{U_1}dU=U_2-U_1$
+4. $\int^{U_2}_{U_1}dU + \int^{U_1}_{U_2}=0$
+5. $\int^{U_2}_{U_1}$ is path independent
+
+Violation of any of these implies perpetual motion.
+
+The essential contribution of Gibbs to thermodynamics: $U(x,y,z,...)$ has an exact differential.
+
+Now let's take advantage of this:
+
+$dU=(\frac{\partial U}{\partial x})_{y,z,...}dx+(\frac{\partial U}{\partial y})_{x,z,...}dy+(\frac{\partial U}{\partial z})_{x,y,...}dz+(\frac{\partial U}{\partial ...})_{x,y,z}d...$
+
+In the lingo: a function with this property is known as a state function
+
+How do we change internal energy? We add or subtract something.
+
+|Energy|Cognate intensive thermo variable|
+|<-----|<--------------------------------|
+|Heat (Q)| Temperature (T)|
+|PV (mechanical work)|Pressure (P)|
+|Electrical work|Electrical potential|
+|Gravitational work|Gravitational potential|
+|Chemical work (object of our affection)|Chemical potential ($\mu$)|
+
+Think of the cognate variables as the thing that lets you investigate the directionality of the change in energy.
+
+Chemical work has two types:
+
+1. change in composition of a phase: exchanging between garnet and biotite (exchange reaction)
+2. change in abundance of a phase: exchanging between liquid water and water vapor (net transfer reaction)
+
+Consider a system in which chemical work is impossible. The system is fixed in composition (pure substance). System has one phase only that is fixed in abundance or amount.
+
+In this system we allow PV work and heat only.
+
+$U$ can be changed by adding or extracting heat, by performing PV work, or by allowing system to perform PV work on its surroundings.
+
+$dU=\delta Q+\delta W$
+
+We can't know a priori how to integrate $\delta Q$ or $\delta W$. a priori don't know if these are exact differentials.
+
+Need to transform these into integrateable forms (alternatively we need to transform energetic changes into a form that relies on easily measured variables).
 
 ## Sep 7 2018
+Thought experiment:
 
 ## Sep 10 2018
 
