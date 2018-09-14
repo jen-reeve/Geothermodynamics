@@ -281,9 +281,41 @@ In general, the work done on a system will be greater than in our thought experi
 
 During a reversible process:
 
+$\frac{\delta[energy]}{cognate intensive variable}=d(new variable)$
 
+Now we can consider heat: $\frac{\delta Q}{T}=dS$ where $T$ is the potential that monitors heat flow and $S$ is the thermal displacement.
+
+Forget about the definition of entropy right now, none of this disorder shit. Entropy isn't that special. Just a variable.
+
+$\frac{\delta Q}{T}\leq dS$ For a reversible process, it's equal. In reality, its an inequality. Entropy is always greater than the heat.
+
+2nd law of thermodynamics
+
+$dU=TdS-PdV$ now measureable (for a pure substance)
 
 ## Sep 10 2018
+Pursue the definition at equilibrium, specifically the definition of $U$. Start releasing restraints.
+
+$d=\delta Q+\delta W=TdS-PdV=0$ when you do thermal work you add or subtract heat at constant temperature.
+
+$U$ is a function of $S$ and $V$ for a fixed amount of substance: $U(S,V)$
+
+New definition for $T$ and $P$:
+
+$T=(\frac{\partial U}{\partial S})ds$ intensive
+
+$-P=(\frac{\partial U}{\partial P})_{S,n}dP$ intensive %something is up here
+
+Expand this to allow for possibility of chemical work: ie phase composition might change or abundances of phases in your system might change
+
+1. Define a phase or system (collection of phases) descrbied by $c$ components ($c=$ number of components -> $1,2,3,...,c$)
+2. each component will be present in an amount $n_1,n_2,n_3,...,n_c$
+
+This releases the pure substance restraints
+
+$U$ is now: $U(S,V,n_1,n_2,n_3,...,n_c)$
+
+$dU=(\frac{\partial U}{\partial S})_{V,n}dS+(\frac{\partial U}{\partial V})_{S,n}dV$
 
 ## Sep 12 2018
 
