@@ -254,7 +254,7 @@ We can't know a priori how to integrate $\delta Q$ or $\delta W$. a priori don't
 Need to transform these into integrateable forms (alternatively we need to transform energetic changes into a form that relies on easily measured variables).
 
 ## Sep 7 2018
-Thought experiment:
+Thought experiment: assume that the system is at the same temperature for all time. Have a 
 
 ## Sep 10 2018
 
