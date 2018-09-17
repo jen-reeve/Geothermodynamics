@@ -315,17 +315,17 @@ This releases the pure substance restraints
 
 $U$ is now: $U(S,V,n_1,n_2,n_3,...,n_c)$
 
-$dU=(\frac{\partial U}{\partial S})_{V,n}dS+(\frac{\partial U}{\partial V})_{S,n}dV+(\frac{\partial U}{\partial n_1})_{S,V,n!=n_1}dn_1+...$
+$dU=(\frac{\partial U}{\partial S})_{V,n}dS+(\frac{\partial U}{\partial V})_{S,n}dV+(\frac{\partial U}{\partial n_1})_{S,V,n\neq n_1}dn_1+...$
 
-Define a new intensive variable of chemical potential of component: $\mu_i=(\frac{\partial U}{\partial n_i})_{S,V,n!=n_i}$
+Define a new intensive variable of chemical potential of component: $\mu_i=(\frac{\partial U}{\partial n_i})_{S,V,n\neq n_i}$
 
-$dU=Tds-PdV+\mu_1dn_1+\mu_2dn_2+\mu_3dn_3+...+\mu_cdn_c=TdS-PdV+\Sigma^c_{i=1}\mu_idn_i$
+$dU=Tds-PdV+\mu_1dn_1+\mu_2dn_2+\mu_3dn_3+...+\mu_cdn_c=TdS-PdV+\displaystyle\sum^c_{i=1}\mu_idn_i$
 
 Euler's theorem tells us for homogeneous function of degree 1 (if you double stuff and you double other variables then you double internal energy)
 
-$U(S,V,n_i)=TS-PV+\Sigma^c_{i=1}\mu_in_i$
+$U(S,V,n_i)=TS-PV+\displaystyle\sum^c_{i=1}\mu_in_i$
 
-for 1 component (pure substance) varies in abundance not composition: $U=TS-PV+\Sigma\mu_in_i$
+for 1 component (pure substance) varies in abundance not composition: $U=TS-PV+\displaystyle\sum\mu_in_i$
 
 Divide by $n_i$: $\frac{U}{n_i}=\frac{TS}{n_i}-\frac{PV}{n_i}+\frac{\mu_in_i}{n_i}$
 
@@ -335,9 +335,9 @@ $\mu_i=\bar{U}-T\bar{S}+P\bar{V}$
 
 $\bar{U}$ is the internal energy per mole of component 1
 
-Solution phase of multicomponent system: divide by $\Sigma^c_{i=1}n_i$
+Solution phase of multicomponent system: divide by $\displaystyle\sum^c_{i=1}n_i$
 
-$\bar{U}=T\bar{S}-P\bar{V}+\Sigma^c_{i=1}\mu_ix_i$
+$\bar{U}=T\bar{S}-P\bar{V}+\displaystyle\sum^c_{i=1}\mu_ix_i$
 
 $X_i$ is the mole fraction of component i aka the moles of component i divided by the total number of moles in the system
 
@@ -355,11 +355,77 @@ consider a solution phase $j$ (way of indicating which phase you are talking abo
 
 $\bar{U}_j=T\bar{S}_j-P\bar{V}_j+\Sigma^c_{i=1}\mu_{i,j}X_i$ (Component i may be present in multiple phases)
 
-example: $\mu_{\ch{H20}$ the numerical value will be different for steam versus ice
+example: $\mu_{H_20}$ the numerical value will be different for steam versus ice
 
-$\mu_{\ch{SiO2}}$
+$\mu_{SiO_2}$ numberic value will be different for $\alpha$-quartz, $\beta$-quartz, stishovite, tridymite
+
+$\mu_{Al_2SiO_5}$ different for andallusite, byomite, sillimanite
+
+$\mu_{i,j}$ where $i$ is the component and $j$ is the phase
+
+ex: $\mu^{P,T}_{i,j}$ as $\mu^{3kbar,500C}_{Al_2SiO_5,kyamite}$
 
 ## Sep 12 2018
+Homogeneous equilibrium: refers to processes internal to a phase ($\Delta T,\Delta P, \Delta n_i$)
+
+known volume of a single phase
+
+example: plagioclase feldspar: here we refer to the state of the internal distribution of components within a phase
+
+Internal distribution is time invariant:
+
+$\bar{U}_j=T\bar{S}_j-P\bar{V}_j+\displaystyle\sum^c_{i=1}\mu_{i,j}X_j$ molar internal energy
+
+1. take the total differential (use the product rule)
+
+$d\bar{U}_j=Td\bar{S}_j+\bar{S}_jdT-Pd\bar{V}_j-\bar{V}_jdP+\displaystyle\sum^c_{i=1}\mu_{i,j}dX_j+\displaystyle\sum^c_{i=1}X_jd\mu_{i,j}=0$ at equilibrium
+
+2. compare to alternate form of $d\bar{U_j}$
+
+$d\bar{U}_j=Td\bar{S}_j-Pd\bar{V}_j+\displaystyle\sum^c_{i=1}\mu_{i,j}dX_j=0$ at equilibrium
+
+3. at equilibrium these expressions are the same, so we can set them equal and eliminate common terms
+
+$\bar{S}_jdT-\bar{V}_jdP+\displaystyle\sum^c_{i=1}X_jd\mu_{i,j}=0$
+
+now we can multiply by the total amount of material in the system to get the extensive version:
+
+$S_jdT-V_jdP++\displaystyle\sum^c_{i=1}n_id\mu_{i,j}=0$
+
+This allows us to define the Gibbs-Duhem equation which applies under conditions of homogeneous equilibrium (that is that it refers to a single phase ignoring for the time what else might be present)
+
+What good is it? shows how at equilibrium cation ordering (chemical zoning) in a crystal responds to $dP,dT$. We can use this ot back out the changes in $T$ and $P$ experienced by a crystal using the final cation ordering in a crystal. It allows for the construction of phase diagrams without any knowledge of thermodynamics.
+
+Its most famous application is in the derivation of the phase rule:
+
+Consider a system of $p$ phases and $c$ components. The number of variables (degrees of freedom,$f$) that define this system will be $c+2$ in number. $f=c+2-p$
+
+example: metamorphosed bauxite with \ch{Al2O3} and \ch{SiO2} in 1:1 molar proportions (\ch{Al2SiO5}). You can find this in NM and NH in three different minerals: kyanite, andalucite and sillimanite
+
+$c=1$, $p=3$ so $f=1+2-3=0$
+
+This tells us that temperature and pressure can't be changed independently. Don't apply this willynilly.
+
+Let's get away from homogeneous equilibrium and into
+
+Heterogeneous equilibrium: definted by relations among variables in a system with 2 or more phases at equilibrium.
+
+Consider a 2 phase system:
+- phases are pure substances defined by the same composition and described by one component
+- the outer boundary is rigid, impermeable and insulating
+
+Each phase ($\alpha$ and $\beta$ have variables $V,n,S,P,T,\mu$ specific to the phase)
+
+Because the boundary is rigid, we can say: $V_{system}=V_\alpha+V_\beta=constant$ so $dV_{system}=0=dV_\alpha+dV_\beta$ so $dV_\alpha=-dV_\beta$
+
+Because the boundary is impermeable, we can say: $n_{system}=n_\alpha+n_\beta=constant$ so $dn_\alpha=-dn_\beta$
+
+Because the boundary is insulating we can say: $dQ_{system}=0$ so $dS_{system}=\frac{dQ_{system}}{T}=0$ at equilibrium and $S_{system}=S_\alpha+S_\beta$ so $dS_\alpha=-dS_\beta$
+
+Because the system is at equilibrium $U_{system}$ is at a local minimum so $dU_{system}=0$
+
+next we will apply these constraints to come up with 3 conditions of heterogeneous equilibrium.
+
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
