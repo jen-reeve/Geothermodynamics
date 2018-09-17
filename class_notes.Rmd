@@ -315,7 +315,49 @@ This releases the pure substance restraints
 
 $U$ is now: $U(S,V,n_1,n_2,n_3,...,n_c)$
 
-$dU=(\frac{\partial U}{\partial S})_{V,n}dS+(\frac{\partial U}{\partial V})_{S,n}dV$
+$dU=(\frac{\partial U}{\partial S})_{V,n}dS+(\frac{\partial U}{\partial V})_{S,n}dV+(\frac{\partial U}{\partial n_1})_{S,V,n!=n_1}dn_1+...$
+
+Define a new intensive variable of chemical potential of component: $\mu_i=(\frac{\partial U}{\partial n_i})_{S,V,n!=n_i}$
+
+$dU=Tds-PdV+\mu_1dn_1+\mu_2dn_2+\mu_3dn_3+...+\mu_cdn_c=TdS-PdV+\Sigma^c_{i=1}\mu_idn_i$
+
+Euler's theorem tells us for homogeneous function of degree 1 (if you double stuff and you double other variables then you double internal energy)
+
+$U(S,V,n_i)=TS-PV+\Sigma^c_{i=1}\mu_in_i$
+
+for 1 component (pure substance) varies in abundance not composition: $U=TS-PV+\Sigma\mu_in_i$
+
+Divide by $n_i$: $\frac{U}{n_i}=\frac{TS}{n_i}-\frac{PV}{n_i}+\frac{\mu_in_i}{n_i}$
+
+$\bar{U}=T\bar{S}-P\bar{V}+\mu_i$
+
+$\mu_i=\bar{U}-T\bar{S}+P\bar{V}$
+
+$\bar{U}$ is the internal energy per mole of component 1
+
+Solution phase of multicomponent system: divide by $\Sigma^c_{i=1}n_i$
+
+$\bar{U}=T\bar{S}-P\bar{V}+\Sigma^c_{i=1}\mu_ix_i$
+
+$X_i$ is the mole fraction of component i aka the moles of component i divided by the total number of moles in the system
+
+examples:
+
+Plagioclase crystal:
+
+Component 1: \ch{NaAlSi3O8} (Ab)
+
+Component 2: \ch{CaAl2Si2O8} (An)
+
+$X_{ab}=\frac{n_{ab}}{n_{plagioclase}}=\frac{n_{ab}}{n_{ab}+n_{an}}$
+
+consider a solution phase $j$ (way of indicating which phase you are talking about)
+
+$\bar{U}_j=T\bar{S}_j-P\bar{V}_j+\Sigma^c_{i=1}\mu_{i,j}X_i$ (Component i may be present in multiple phases)
+
+example: $\mu_{\ch{H20}$ the numerical value will be different for steam versus ice
+
+$\mu_{\ch{SiO2}}$
 
 ## Sep 12 2018
 
