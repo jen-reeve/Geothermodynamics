@@ -302,9 +302,9 @@ $U$ is a function of $S$ and $V$ for a fixed amount of substance: $U(S,V)$
 
 New definition for $T$ and $P$:
 
-$T=(\frac{\partial U}{\partial S})ds$ intensive
+$T=(\frac{\partial U}{\partial S})_{n,P,V}ds$ intensive
 
-$-P=(\frac{\partial U}{\partial P})_{S,n}dP$ intensive %something is up here
+$-P=(\frac{\partial U}{\partial V})_{S,n,T}dV$ intensive 
 
 Expand this to allow for possibility of chemical work: ie phase composition might change or abundances of phases in your system might change
 
