@@ -10,6 +10,7 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
 
 # Class notes
@@ -426,6 +427,77 @@ Because the system is at equilibrium $U_{system}$ is at a local minimum so $dU_{
 
 next we will apply these constraints to come up with 3 conditions of heterogeneous equilibrium.
 
+##Sep 19 2018
+### Case 1
+Inner boundary is rigid, impermeable but conducting (allows for heat transfer)
+
+so: $dV_\alpha=0=-dV_\beta$, $dn_\alpha=0=-dn_\beta$.
+
+Equilibrium must be maintained with respect to an incremental amount of heat transfer between phases (a reversible process):
+
+$dU_\alpha=T_\alpha dS_\alpha$ and $dU_\beta=T_\beta dS_\beta$
+
+$dU_{system}=T_\alpha dS_\alpha+T_\beta dS_\beta=0$
+
+$dS_\alpha=-dS_\beta$ from our insulating external boundary
+
+This implies that at equilibrium $(T_\alpha-T_\beta)dS_\alpha=0$
+
+By definition: $dS_\alpha=\frac{dQ_\alpha}{T_\alpha}$ and $\frac{dQ_\alpha}{T_\alpha}$ is not zero
+
+So if we substitute in above $(T_\alpha-T_\beta)dS_\alpha=(T_\alpha-T_\beta)\frac{dQ_\alpha}{T_\alpha}=0$ requires that $(T_\alpha-T_\beta)=0$ which means that $T_\alpha=T_\beta$
+
+### Case 2
+Inner boundary is impermeable, flexible and conducting (allows for heat transfer and PV work)
+
+So $dn_\alpha=0=-dn_\beta$
+
+Equilibrium must be maintained with respect to the transfer of an incremental amount of heat between phases and incremental changes in phase volues.
+
+At equilibrium $dU_{system}=(T_\alpha dS_\alpha-P_\alpha dV_\alpha)+(T_\beta dS_\beta-P_\beta dS_\beta)=0$
+
+And as before $dS_\alpha=-dS_\beta$ and $dV_\alpha=-dV_\beta$ so: $dU_{system}=(T_\alpha-T_\beta)dS_\alpha-(P_\alpha-P_\beta)dV_\alpha=0$
+
+We know from Case #1 that $T_\alpha=T_\beta$ which makes the whole first term equal to zero, so now the second term must also equal zero which means that $P_\alpha=P_\beta$
+
+### Case 3
+Inner boundary is permeable, flexible and conducting (allows for heat transfer, mechanical work and chemical work)
+
+$dU_{system}=dU_\alpha+dU_\beta=0=(T_\alpha dS_\alpha-P_\alpha dV_\alpha+\mu_{1,\alpha}dn_\alpha)+(T_\beta dS_\beta-P_\beta dV_\beta+\mu_{1,\beta})$ (remember that $\mu_{1,\alpha}$ means the chemical potential of component 1 in phase $\alpha$, here the inclusion of the component is redundant, but it's good practice)
+
+From our external boundary we know: $dS_\alpha=-dS_\beta$, $dV_\alpha=-dV_\beta$ and $dn_\alpha=-dn_\beta$
+
+So $dU_{system}=(T_\alpha-T_\beta)dS_\alpha-(P_\alpha-P_\beta)dV_\alpha+(\mu_{1,\alpha}-\mu_{1,\beta})dn_\alpha=0$. From above we know that $T_\alpha=T_\beta$ and $P_\alpha=P_\beta$ so the final term must also equal zero and thus $\mu_{1,\alpha}=\mu_{1,\beta}$
+
+### Conditions of heterogeneous equilibrium
+1. $T_\alpha=T_\beta$
+2. $P_\alpha=P_\beta$
+3. $\mu_{1,\alpha}=\mu_{1,\beta}$ (this is a special case, but we'll look at the more general)
+
+### 2 Feldspar Thermometer Example
+The thermometer uses the composition of coexisting plagioclase and alkali feldspar to tell the temperature at which they were last at equilibrium.
+
+So we have:
+|Phase I|Phase II|
+|<------|<-------|
+|Plagioclase|Alkali|
+|ab \ch{NaAlSi3O8}|ab \ch{NaAlSi3O8}|
+|an \ch{CaAl2Si2O8}|or \ch{KAlSi3O8}|
+
+The two phases share a component: ab
+
+At equilibrium $\mu_{ab,I}=\mu_{ab,II}$
+
+Chemical potentials can be represented as functions of temperature, pressure and mole fractions so we can look at $f(T,P,X_{ab,I},X_{ab,II})=0$ but we know that $X_{ab,I}$ and $X_{ab,II}$ are fixed, so the function is just of temperature and pressure $f(T,P)=0$
+
+```{r, echo=FALSE}
+df<-data.frame(x=c(5:20),y=c(seq(0,45,by=3)))
+ggplot(df,aes(x=x,y=y))+geom_line()+labs(x="Temperature",y="Pressure")
+```
+
+The line represents the relationship between temperature and pressure at equilibrium for feldspars of fixed composition.
+
+Take home: going from $\mu_\alpha-\mu_\beta=0$ to the specific function is complicated, but we can always come back to $\mu_\alpha-\mu_\beta=0$
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
