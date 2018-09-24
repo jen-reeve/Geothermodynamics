@@ -228,7 +228,7 @@ In the lingo: a function with this property is known as a state function
 How do we change internal energy? We add or subtract something.
 
 |Energy|Cognate intensive thermo variable|
-|<-----|<--------------------------------|
+|:-----|:--------------------------------|
 |Heat (Q)| Temperature (T)|
 |PV (mechanical work)|Pressure (P)|
 |Electrical work|Electrical potential|
@@ -498,6 +498,108 @@ ggplot(df,aes(x=x,y=y))+geom_line()+labs(x="Temperature",y="Pressure")
 The line represents the relationship between temperature and pressure at equilibrium for feldspars of fixed composition.
 
 Take home: going from $\mu_\alpha-\mu_\beta=0$ to the specific function is complicated, but we can always come back to $\mu_\alpha-\mu_\beta=0$
+
+## Sep 24 2018
+Working towards a generalized 3rd condition of heterogeneous equilibrium
+
+Generally: have a system with phases: $j$ in number, pure substances; phase components $i$ in number and system components $k$ in number. The system's external boundary is rigid, insulating and impermeable so: $dV_{system}=\displaystyle\sum_jdV_j=0$, $dS_{system}=\displaystyle\sum_jdS_j=0$, $dn_k=0$ for all $k$
+
+We can make 3 general statements
+
+### 1: there exists a stoichiometric reaction relationship among the phase components $i$
+$\displaystyle\sum_i\nu_i(i)=0$ where $\nu_i$ represents the stoichiometric coefficients (positive for products, negative for reactants)
+
+### 2: We can write the total number of moles of each system component $k$ in terms of the number of moles of each phase component $i$
+$n_k=\displaystyle\sum_i\epsilon_{k,i}n_i=constant$ where $\epsilon_{k,i}$ is the moles of system component $k$ in one mole of phase component $i$
+
+As a result: $dn_k=\displaystyle\sum_i\epsilon_{k,i}dn_i=0$
+
+### 3: We can arbitrarily pick one phase component (1) and express the $dn_i$ in terms of $dn_1$
+
+### Specific example: rock!
+|Phases ($j$)|Phase components ($i$)|abbreviation|System components ($k$)|
+|:-----------|:---------------------|:-----------|:----------------------|
+|anorthite|\ch{CaAl2Si2O8}|an|\ch{CaO}|
+|grossular|\ch{Ca3Al2Si3O12}|gr|\ch{SiO2}|
+|kyanite|\ch{Al2SiO5}|ky|\ch{Al2O3}|
+|quartz|\ch{SiO2}|qz||
+
+System boundary: rigid, insulating, and no loss/gain of system components across the boundary
+
+Definitions reminders:
+
+Phase component: typically the most efficient way to describe the composition of each phase ($C_p$)
+
+System component: most efficient way to describe the composition of the whole system ($C_s$). Typically oxides except in redox conditions
+
+In general: $C_s\leq C_p$ which implies a linear relationship relating the components
+
+Repeating the statements from above with this specific case:
+### 1: Stoichiometric reaction relationship
+3\ch{CaAl2Si2O8}-\ch{Ca3Al2Si3O12}-2\ch{Al2SiO5}-\ch{SiO2}$=0=3an-gr-2ky-qz$
+
+So $\nu_{an}=3$, $\nu_{gr}=-1$, $\nu_{ky}=-2$ and $\nu_{qz}=-1$
+
+This is the most compact and complete way of describing mass transfer among phase components and accordingly relations among $\mu_{i,j}$ at equilibrium
+
+The stoichiometric relationship between phase components, NOT phases. Phases aren't always pure, but we will still be able to develop the stoichiometric relationship of the phase components.
+
+The choice of anorthite as the product was arbitrary here, could have been any of them.
+
+### 2: Chemistry of the system is related to chemistry of the phase components
+$n_{CaO}=3n_{gr}+1n_{an}+0n_{ky}+0n_{qz}$ so $\epsilon_{CaO,gr}=3$, $\epsilon_{CaO,an}=1$ and $\epsilon_{CaO,ky}=\epsilon_{CaO,qz}=0$
+
+$n_{Al_2O_3}=1n_{gr}+1n_{an}+1n_{ky}+0n_{qz}$ so $\epsilon_{Al_2O_3,gr}=\epsilon_{Al_2O_3,an}=\epsilon_{Al_2O_3,ky}=1$ and $\epsilon_{Al_2O_3,qz}=0$
+
+$n_{SiO_2}=3n_{gr}+2n_{an}+1n_{ky}+1n_{qz}$ so $\epsilon_{SiO_2,gr}=3$, $\epsilon_{SiO_2,an}=2$ and $\epsilon_{SiO_2,ky}=\epsilon_{SiO_2,qz}=1$
+
+We know that $dn_k=\displaystyle\sum_i\epsilon_{k,i}dn_i=0$ so:
+
+$dn_{CaO}=3dn_{gr}+1dn_{an}=0$
+
+$dn_{Al_2O_3}=1dn_{gr}+1dn_{an}+1dn_{ky}=0$
+
+$dn_{SiO_2}=3dn_{gr}+2dn_{an}+1dn_{ky}+1dn_{qz}=0$
+
+### 3: let $gr$ be phase component 1
+[\ch{CaO}] $dn_{an}=-3dn_{gr}$ which can then be substituted into:
+
+[\ch{Al2O3}] $dn_{gr}-3dn_{gr}+dn_{ky}=0$ so $dn_{ky}=2dn_{gr}$ which we can substitute into:
+
+[\ch{SiO2}] $3dn_{gr}-6dn_{gr}+2dn_{gr}+dn_{qz}=0$ so $dn_{qz}=dn_{gr}$
+
+### The quick way
+i. pick a reference $C_p$
+ii. $dn_i=f(dn_1)$ after solving $dn_k=\displaystyle\sum_i\epsilon_{k,i}dn_i$ which generally is of the form: $dn_i=\frac{\nu_i^\alpha}{\nu_1^\alpha}dn_1$
+
+This describes the coupling between each change in the number of mole of your $C_p$ given the stoichiometric reaction relationship ($\alpha$) among phase components $i$
+
+Here we have a stoichiometric reaction relationship: $3an-gr-2ky-qz=0$
+
+We set phase component 1 as $gr$ so we get:
+
+$dn_{an}=\frac{+3}{-1}dn_{gr}=-3dn_{gr}$
+
+$dn_{ky}=\frac{-2}{-1}dn_{gr}=2dn_{gr}$
+
+$dn_{qz}=\frac{-1}{-1}dn_{gr}=1dn_{gr}$
+
+$dn_{gr}=\frac{-1}{-1}dn_{gr}=1dn_{gr}$
+
+This allows us to simplify our expression for the internal energy of the entire system.
+
+As a slightly generalized example:
+
+$dU_{system}=\displaystyle\sum_jdU_j=0$ at equilibrium
+
+$dU_j=T_jdS_j-P_jdV_j+\mu_{i,j}dn_i$
+
+$dU_{system}=\displaystyle\sum_jT_jdS_j-\displaystyle\sum_jP_jdV_j+\displaystyle\sum_j\mu_{i,j}dn_i=0$
+
+Because of the first and second conditions of heterogeneous equilibrium, we know that $T$ and $P$ are constant throughout the system so:
+
+$dU_{system}=T\displaystyle\sum_jdS_j-P\displaystyle\sum_jdV_j+\displaystyle\sum_j\mu_{i,j}dn_i=0$ where we know that $\displaystyle\sum_jdS_j=0$ and $\displaystyle\sum_jdV_j=0$ so $\displaystyle\sum_j\mu_{i,j}dn_i=0$ and this is where we will apply the stoichiometric reaction relationship.
+
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
