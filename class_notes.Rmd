@@ -11,6 +11,7 @@ header-includes:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(latex2exp)
 ```
 
 # Class notes
@@ -669,7 +670,108 @@ If we then divide by $\displaystyle\sum_in_i$ we get the gibbs free energy on a 
 For a pure substantce: $\bar{G_j}=\mu_{1,j}$ because $X_i=1$
 
 ## September 28 2018
+Energy functions:
 
+- $U$: internal energy
+- $H\equiv U+PV$: enthalpy
+- $A\equiv U-TS$: Helmholtz free energy
+- $G\equiv U+PV-TS$: Gibbs free energy
+
+The Gibbs free energy isolates the energetic changes due to the addition/subtraction of mass from the system aka it isolates the chemical work
+
+Another way to think about these is to consider the system boundaries (assuming for the time being that the number of moles of the system components is constant)
+
+|Energy function|Function of|System boundaries|
+|:--------------|:----------|:----------------|
+|$U$|$f(S,V)$|insulating, rigid|
+|$H$|$f(S,P)$|insulating, flexible|
+|$A$|$f(T,V)$|conducting, rigid|
+|$G$|$f(T,P)$|conducting, flexible|
+
+Gibbs free energy is generally a geologist's favority energy function because it is a function of temperature and pressure
+
+But enthalpy is useful for magma ascent (because it is adiabatic) and Helmholtz free energy is great for experiments because we can fix the volume and measure the pressure.
+
+Focusing on Gibbs again
+
+$U_j=TS_j-PV_j+\displaystyle\sum_i\mu_{i,j}n_i$
+
+$G\equiv U-TS+PV$
+
+$G_j=\displaystyle\sum_i\mu_{i,j}n_i$ this is extensive
+
+If we divide by $\displaystyle\sum_in_i$ we can make it intensive!
+
+$\bar{G_j}=\displaystyle\sum_i\mu_{i,j}X_i$ where $X_i$ is the mole fraction defined as $X_i=\frac{n_i}{\displaystyle\sum_in_i}$. Now we have the gibbs free energy on a per mole basis
+
+If we consider a pure substance (composition is defined by one phase component): $X_i=1$ because $\displaystyle\sum_in_i=n_i$ so $\bar{G_j}=\mu_{1,j}$ which means that the chemical potential can be defined as the Gibbs free energy per mole.
+
+The third condition of heterogeneous equilibrium is: $\displaystyle\sum_i\mu_{i,j}\mu_i=0$ at equilibrium
+
+for a system composed of pure substances, phases and phase components are the same, so: $\displaystyle\sum_j\nu_j\bar{G_j}^{P_{eq},T_{eq}}=0$ where $\bar{G_j}^{P_{eq},T_{eq}}$ means the molar Gibbs free energy of phase $j$ at the pressure and temperature of equilibrium
+
+So now how do we estimate $\bar{G_j}^{P_{eq},T_{eq}}$?
+
+Strategy:
+
+The question we are trying to answer is how do we calculate the molar gibbs free energy of a pure substance at a specific temperature and pressure?
+
+Conventionally (for tabulated data) the $T_0$ and $P_0$ we use for our reference state are 298K and 1 bar respectively.
+
+$G$ and $\bar{G}$ are path independent variables: $\bar{G_j}^{P_f,T_f}=\bar{G_j}^{P_0,T_0}+\displaystyle\int^{P_f,T_f}_{P_0,T_0}d\bar{G_j}$
+
+So we can break down the path from $\bar{G_j}^{P_0,T_0}$ to $\bar{G_j}^{P_f,T_f}$ into the two sections shown on the graph in red and blue.
+
+```{r, echo=FALSE}
+df<-data.frame(temps=c(298,298+5,298+5),press=c(1,1,1.5))
+ggplot(df,aes(x=temps,y=press))+
+  geom_point()+
+  xlab("Temperature")+
+  ylab("Pressure")+
+  annotate("text",x=298,y=1.02,label=TeX("$\\bar{G}_j^{P_0,T_0}$",output="character"),parse=T)+
+  annotate("text",x=303,y=1.52,label=TeX("$\\bar{G}_j^{P_f,T_f}$",output="character"),parse=T)+
+  annotate("text",x=303.25,y=1,label=TeX("$\\bar{G}_j^{P_0,T_f}$",output="character"),parse=T)+
+  scale_x_continuous(breaks=c(298,303),labels=c(TeX("T_0"),TeX("T_f")))+
+  scale_y_continuous(breaks=c(1,1.5),labels=c(TeX("P_0"),TeX("P_f")))+
+  geom_segment(aes(x=298,y=1,xend=303,yend=1),linetype="dashed",color="blue")+
+  geom_segment(aes(x=303,y=1,xend=303,yend=1.5),linetype="dashed",color="red")
+```
+
+Remember that: $G\equiv U-TS+PV$ and $H\equiv U+PV$ (function of volume) *for a pure substance*
+
+So we can redefine $G=H-TS$
+
+Let's look first at the mechanics of this calculation for volume. This is both easier to visualize and we can know $\bar{V_j}^{P_0,T_0}$ very precisely using methods like XRD.
+
+```{r, echo=FALSE}
+df<-data.frame(temps=c(298,298+5,298+5),press=c(1,1,1.5))
+ggplot(df,aes(x=temps,y=press))+
+  geom_point()+
+  xlab("Temperature")+
+  ylab("Pressure")+
+  annotate("text",x=298,y=1.02,label=TeX("$\\bar{V}_j^{P_0,T_0}$",output="character"),parse=T)+
+  annotate("text",x=303,y=1.52,label=TeX("$\\bar{V}_j^{P_f,T_f}$",output="character"),parse=T)+
+  annotate("text",x=303.25,y=1,label=TeX("$\\bar{V}_j^{P_0,T_f}$",output="character"),parse=T)+
+  scale_x_continuous(breaks=c(298,303),labels=c(TeX("T_0"),TeX("T_f")))+
+  scale_y_continuous(breaks=c(1,1.5),labels=c(TeX("P_0"),TeX("P_f")))+
+  geom_segment(aes(x=298,y=1,xend=303,yend=1),linetype="dashed",color="blue")+
+  geom_segment(aes(x=303,y=1,xend=303,yend=1.5),linetype="dashed",color="red")
+```
+
+As before we have our two integration paths shown in red (a) and blue (b) so
+
+a: $\bar{V_j}^{P_0,T_f}-\bar{V_j}^{P_0,T_0}=\displaystyle\int^{T_f}_{T_0}(\frac{\partial \bar{V_j}}{\partial T})\displaystyle\vert_{P_0} dT$
+
+b: $\bar{V_j}^{P_f,T_f}-\bar{V_j}^{P_0,T_f}=\displaystyle\int^{P_f}_{P_0}(\frac{\partial \bar{V_j}}{\partial P})\displaystyle\vert_{T_f} dP$
+
+so $\bar{V_j}^{P_f,T_f}=\bar{V_j}^{P_0,T_0}+\displaystyle\int^{T_f}_{T_0}(\frac{\partial \bar{V_j}}{\partial T})\displaystyle\vert_{P_0} dT+\displaystyle\int^{P_f}_{P_0}(\frac{\partial \bar{V_j}}{\partial P})\displaystyle\vert_{T_f} dP$
+
+Now we need to know $\frac{\partial \bar{V_j}}{\partial T}$ and $\frac{\partial \bar{V_j}}{\partial P}$ functions
+
+There are a couple of ways of estimating these:
+
+1. $(\frac{\partial \bar{V_j}}{\partial T})_P=(\frac{\partial \bar{V_j}}{\partial P})_T=0$ This convention was introduced by Helgeson et. al. 1978. It works well for pressures below 5 to 10 kbar and temperatures below 800 C
+2. Here we define a coefficient of thermal expansion ($\alpha_j\equiv\frac{1}{\bar{V_j}}(\frac{\partial \bar{V_j}}{\partial T})_P$) and a coefficient of compressibility ($\beta_j\equiv\frac{1}{\bar{V_j}}(\frac{\partial \bar{V_j}}{\partial P})_T$) and assume that these are constant. This was introduced by Holland and Powell in 1990 and is the method we will use for the problem set.
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
