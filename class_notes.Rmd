@@ -600,6 +600,72 @@ Because of the first and second conditions of heterogeneous equilibrium, we know
 
 $dU_{system}=T\displaystyle\sum_jdS_j-P\displaystyle\sum_jdV_j+\displaystyle\sum_j\mu_{i,j}dn_i=0$ where we know that $\displaystyle\sum_jdS_j=0$ and $\displaystyle\sum_jdV_j=0$ so $\displaystyle\sum_j\mu_{i,j}dn_i=0$ and this is where we will apply the stoichiometric reaction relationship.
 
+## Sep 26 2018
+4 phases (an, gr, qz, ky) represented as $j$
+
+4 phase components, pure substances, represented as $i$
+
+$\displaystyle\sum_j\mu_{i,j}dn_i=0$ can be rewritten as $\displaystyle\sum_i\mu_{i,j}\frac{\nu_i}{\nu_1}dn_1=0$
+
+If we multiply this by $\nu_1$ and $\frac{1}{dn_1}$ we get: $\displaystyle\sum_i\mu_{i,j}\nu_i=0$ at equilibrium which is the third condition of heterogeneous equilibrium
+
+For every stoichiometric reaction relationship that can be written among the phase components in a system, there exists, at equilibrium, a corresponding relationship among their chemical potentials
+
+$3\mu_{CaAl_2Si_2O_8,an}-1\mu_{Ca3Al_2Si_3O_{12},gr}-2\mu_{Al_2SiO_5,ky}-1\mu_{SiO_2,qz}=0$
+
+$3f_{an}(P,T)-1f_{gr}(P,T)-2f_{ky}(P,T)-1f_{qz}(P,T)=0$
+
+$f(P,T)=0$ at equilibrium
+
+### Energy functions:
+
+$U_j=TS_j-PV_j+\displaystyle\sum_i\mu_{i,j}n_i$
+
+$U_{system}=TS_{system}-PV_{system}+\displaystyle\sum_k\mu_{k,system}n_k$
+
+$dU=TdS-PdV+\displaystyle\sum_i\mu_{i,j}dn_i$
+
+#### Enthalpy:
+
+$U+PV\equiv H$
+
+$dH=dU+PdV+VdP$
+
+$dH=TdS+VdP+\displaystyle\sum_i\mu_{i,j}dn_i=0$
+
+Boundary is insulating but flexible
+
+#### Helmholtz free energy:
+
+$U-TS\equiv A$
+
+$dA=dU-TdS-SdT$
+
+$dA=-SdT-PdV+\displaystyle\sum_i\mu_{i,j}dn_i=0$
+
+Rigid and conducting boundary
+
+#### Gibbs free energy:
+$U+PV-TS\equiv G$
+
+$dG=dU+PdV+VdP-TdS-SdT$
+
+$dG=-SdT+VdP+\displaystyle\sum_i\mu_{i,j}dn_i=0$
+
+Flexible and conducting boundary
+
+$U_j=TS_j-PV_j+\displaystyle\sum_i\mu_{i,j}n_i$
+
+$G_j=U_j+PV_j-TS_j$
+
+$G_j=\displaystyle\sum_i\mu_{i,j}n_i$
+
+If we then divide by $\displaystyle\sum_in_i$ we get the gibbs free energy on a per mole basis: $\bar{G_j}=\displaystyle\sum_i\mu_{i,j}X_i$ where as before $X_i$ is the mole fraction
+
+For a pure substantce: $\bar{G_j}=\mu_{1,j}$ because $X_i=1$
+
+## September 28 2018
+
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
