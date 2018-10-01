@@ -771,7 +771,103 @@ Now we need to know $\frac{\partial \bar{V_j}}{\partial T}$ and $\frac{\partial 
 There are a couple of ways of estimating these:
 
 1. $(\frac{\partial \bar{V_j}}{\partial T})_P=(\frac{\partial \bar{V_j}}{\partial P})_T=0$ This convention was introduced by Helgeson et. al. 1978. It works well for pressures below 5 to 10 kbar and temperatures below 800 C
-2. Here we define a coefficient of thermal expansion ($\alpha_j\equiv\frac{1}{\bar{V_j}}(\frac{\partial \bar{V_j}}{\partial T})_P$) and a coefficient of compressibility ($\beta_j\equiv\frac{1}{\bar{V_j}}(\frac{\partial \bar{V_j}}{\partial P})_T$) and assume that these are constant. This was introduced by Holland and Powell in 1990 and is the method we will use for the problem set.
+2. Here we define a coefficient of thermal expansion ($\alpha_j\equiv\frac{1}{\bar{V_j}}(\frac{\partial \bar{V_j}}{\partial T})_P$) and a coefficient of compressibility ($\beta_j\equiv\frac{-1}{\bar{V_j}}(\frac{\partial \bar{V_j}}{\partial P})_T$) and assume that these are constant. This was introduced by Holland and Powell in 1990 and is the method we will use for the problem set.
+
+## October 1 2018
+$\bar{V_j}^{P_f,T_f}=\bar{V_j}^{P_0,T_0}+\displaystyle\int^{T_f}_{T_0}(\frac{\partial \bar{V_j}}{\partial T})\displaystyle\vert_{P_0} dT+\displaystyle\int^{P_f}_{P_0}(\frac{\partial \bar{V_j}}{\partial P})\displaystyle\vert_{T_f} dP$
+
+Let's break this down into A ($\bar{V_j}^{P_0,T_0}$), B ($\displaystyle\int^{T_f}_{T_0}(\frac{\partial \bar{V_j}}{\partial T})\displaystyle\vert_{P_0} dT$) and C ($\displaystyle\int^{P_f}_{P_0}(\frac{\partial \bar{V_j}}{\partial P})\displaystyle\vert_{T_f} dP$)
+
+Recap the conventions for $\frac{\partial \bar{V_j}}{\partial T}$ and $\frac{\partial \bar{V_j}}{\partial P}$ in minerals:
+
+1. $\frac{\partial \bar{V_j}}{\partial T}=\frac{\partial \bar{V_j}}{\partial P}=0$ which implies that $\bar{V_j}^{P_f,T_f}=\bar{V_j}^{P_0,T_0}$, this is from Helgeson et. al. 1978
+2. coefficients of thermal expansion ($\alpha$) and compressibility ($\beta$) from Holland and Powell 1990 aka what we are going to use
+
+$(\frac{\partial \bar{V_j}}{\partial T})_P=\alpha_j\bar{V_j}=\alpha V$ where $\alpha V$ is a constant, fit parameter determined by Holland and Powell 1990
+
+$(\frac{\partial \bar{V_j}}{\partial P})_T=-\beta_j\bar{V_j}=\beta V$ where $\beta V$ is a constant, fit parameter determined by Holland and Powell 1990
+
+The fact that these are both constant means that it assumes that changes in volume are the same for all temperatures and pressures.
+
+Now $\bar{V_j}^{P_f,T_f}=\bar{V_j}^{P_0,T_0}+\displaystyle\int^{T_f}_{T_0}\alpha VdT-\displaystyle\int_{P_0}^{P_f}\beta VdP$
+
+This general approach of breaking the integration path into parts is how we will tackle Gibbs free energy
+
+$G\equiv U+PV-TS$
+
+This isolates the effects of chemcial work, it allows for the consideration of systems with flexible and conducting boundaries and it changes the focus from terms of $S$ and $\bar{V}$ into terms of $T$ and $P$
+
+$H\equiv U+PV$
+
+so $G=H-TS$ because this is way easier to deal with
+
+So let's break it down starting with enthalpy
+
+```{r, echo=FALSE}
+df<-data.frame(temps=c(298,298+5,298+5),press=c(1,1,1.5))
+ggplot(df,aes(x=temps,y=press))+
+  geom_point()+
+  xlab("Temperature")+
+  ylab("Pressure")+
+  annotate("text",x=298,y=1.02,label=TeX("$\\bar{H}_j^{P_0,T_0}$",output="character"),parse=T)+
+  annotate("text",x=303,y=1.52,label=TeX("$\\bar{H}_j^{P_f,T_f}$",output="character"),parse=T)+
+  annotate("text",x=303.25,y=1,label=TeX("$\\bar{H}_j^{P_0,T_f}$",output="character"),parse=T)+
+  scale_x_continuous(breaks=c(298,303),labels=c(TeX("T_0"),TeX("T_f")))+
+  scale_y_continuous(breaks=c(1,1.5),labels=c(TeX("P_0"),TeX("P_f")))+
+  geom_segment(aes(x=298,y=1,xend=303,yend=1),linetype="dashed",color="blue")+
+  geom_segment(aes(x=303,y=1,xend=303,yend=1.5),linetype="dashed",color="red")
+```
+
+$\bar{H_j}^{P_f,T_f}=\bar{H_j}^{P_0,T_0}+\displaystyle\int^{T_f}_{T_0}(\frac{\partial \bar{H_j}}{\partial T})_{P_0}dT+\displaystyle\int^{P_f}_{P_0}(\frac{\partial \bar{H_j}}{\partial P})_{T_f}dP$
+
+$d\bar{H}=Td\bar{S}+\bar{V}dP$ for a phase fixed in composition and amount
+
+$d\bar{S}=(\frac{\partial \bar{S}}{\partial T})_PdT+(\frac{\partial \bar{S}}{\partial P})_TdP$
+
+$d\bar{H}=T(\frac{\partial \bar{S}}{\partial T})_PdT+[\bar{V}+(\frac{\partial \bar{S}}{\partial P})_TT]dP$
+
+We still need to figure out what $(\frac{\partial \bar{S}}{\partial T})_P$ and $(\frac{\partial \bar{S}}{\partial P})_T$ are.
+
+Starting with $(\frac{\partial \bar{S}}{\partial T})_P$:
+
+We will define a variable called the heat capacity which is defined as the amount of heat required to be added/subtracted to raise/lower the temperature of one mole of a pure substance by one degree. This is a fundamentally experimental quantity and is the second best measured thermodynamic property after $\bar{V}$
+
+For our current purposes we will consider the molar heat capacity at a fixed pressure $\bar{C_P}\equiv(\frac{\partial Q}{\partial T})_P$ but we could also consider it at a fixed volume: $\bar{C_V}=(\frac{\partial Q}{\partial T})_V$.
+
+We can't assume that these are constant, but $(\frac{\partial Q}{\partial T})_P=\bar{C_P}=f(T)$ so we can measure the heat capacity across a range of temperatures and this becomes an exercise in curve fitting.
+
+There are two primary methods for this curve fitting:
+
+1. $\bar{C_P}(T)=a+bT+cT^{-2}$ aka the maier-kelly fitting. Introduced by to geosciences by Helgeson et. al. 1978.
+2. $\bar{C_P}(T)=a+bT+cT^{-2}+dT^{-1/2}$ from Holland and Powell 1990.
+
+There is no significance to the forms these take, they are just to fit the data.
+
+We know that for a reversible process: $dS=\frac{dQ}{T}$
+
+So: $(\frac{\partial \bar{S}}{\partial T})_P=\frac{1}{T}(\frac{\partial Q}{\partial T})_P=\frac{\bar{C_P}}{T}$
+
+Now what about $(\frac{\partial \bar{S}}{\partial P})_T$ (this time we will deal with it using mathematical gymnastics, not experiments)
+
+$d\bar{G}=-\bar{S}dT+\bar{V}dP$ for a phase fixed in composition and amount
+
+$d\bar{G}=(\frac{\partial \bar{G}}{\partial T})_PdT+(\frac{\partial \bar{G}}{\partial P})_TdP$
+
+So: $(\frac{\partial \bar{G}}{\partial T})_P=-\bar{S}$ and $(\frac{\partial \bar{G}}{\partial P})_T=\bar{V}$
+
+But really we don't care about $(\frac{\partial \bar{G}}{\partial P})_T$ but rather $(\frac{\partial \bar{S}}{\partial P})_T$
+
+*for exact differentials the order of differentiation doesn't matter*
+
+So we get a Maxwell relationship: $(\frac{\partial}{\partial P}(\frac{\partial \bar{G}}{\partial T})_P)_T=(\frac{\partial}{\partial T}(\frac{\partial \bar{G}}{\partial P})_T)_P$ where the inner differentials are equivalent to $-\bar{S}$ and $\bar{V}$ respectively (as shown above)
+
+So now: $\frac{\partial}{\partial P}(-\bar{S})_T=\frac{\partial}{\partial T}(\bar{V})_P$ so $(\frac{\partial \bar{S}}{\partial P})_T=-(\frac{\partial \bar{V}}{\partial T})_P=-\bar{V_j}\alpha_j$ *this is not the same as $\alpha V$ which is a fit parameter, here we are looking at the actual $\alpha_j$ and $\bar{V_J}$*
+
+So: $d\bar{H}=\bar{C_P}dT+[\bar{V}-T\bar{V}\alpha]dP$
+
+$(\frac{\partial \bar{H_j}}{\partial T})_{P_0}dT=\bar{C_P}dT$ and $(\frac{\partial \bar{H_j}}{\partial P})_{T_f}dP=[\bar{V}-T\bar{V}\alpha]dP$
+
+$\bar{H_j}^{P_f,T_f}=\bar{H_j}^{P_0,T_0}+\displaystyle\int^{T_f}_{T_0}(\frac{\partial \bar{H_j}}{\partial T})_{P_0}dT+\displaystyle\int^{P_f}_{P_0}(\frac{\partial \bar{H_j}}{\partial P})_{T_f}dP=\bar{H_j}^{P_0,T_0}+\displaystyle\int^{T_f}_{T_0}\bar{C_P}dT+\displaystyle\int^{P_f}_{P_0}[\bar{V}-T\bar{V}\alpha]dP$
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
