@@ -2,16 +2,19 @@
 title: "Geothermodynamics"
 author: "Jennifer Reeve"
 date: "August 28, 2018"
+classoption: table
 output: pdf_document
 header-includes:
   \usepackage{chemformula}
   \usepackage{amsmath}
+  \usepackage{xcolor}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(latex2exp)
+knitr::opts_knit$set(latex.options.xcolor="dvipsnames")
 ```
 
 # Class notes
@@ -868,6 +871,131 @@ So: $d\bar{H}=\bar{C_P}dT+[\bar{V}-T\bar{V}\alpha]dP$
 $(\frac{\partial \bar{H_j}}{\partial T})_{P_0}dT=\bar{C_P}dT$ and $(\frac{\partial \bar{H_j}}{\partial P})_{T_f}dP=[\bar{V}-T\bar{V}\alpha]dP$
 
 $\bar{H_j}^{P_f,T_f}=\bar{H_j}^{P_0,T_0}+\displaystyle\int^{T_f}_{T_0}(\frac{\partial \bar{H_j}}{\partial T})_{P_0}dT+\displaystyle\int^{P_f}_{P_0}(\frac{\partial \bar{H_j}}{\partial P})_{T_f}dP=\bar{H_j}^{P_0,T_0}+\displaystyle\int^{T_f}_{T_0}\bar{C_P}dT+\displaystyle\int^{P_f}_{P_0}[\bar{V}-T\bar{V}\alpha]dP$
+
+## October 3rd 2018
+Nuts and bolts for calculations for 3rd condition of heterogeneous equilibrium for pure mineral substances.
+
+$G=H-TS$
+
+$\bar{G_j}^{P_f,T_f}=\bar{G_j}^{P_0,T_0}+\displaystyle\int^{T_f}_{T_0}\left(\frac{\partial \bar{G_j}}{\partial T}\right)_{P_0}dT+\displaystyle\int^{P_f}_{P_0}\left(\frac{\partial \bar{G_j}}{\partial P}\right)_{T_f}dP$
+
+$d\bar{H}=\bar{C_P}dT+\left[\bar{V}+T\left(\frac{\partial \bar{S}}{\partial P}\right)_T\right]dP$ where we have established that $\bar{C_P}$ is a measurable quantity, and we need to get $\left(\frac{\partial \bar{S}}{\partial P}\right)_T$ into another experimentally measurable quantity.
+
+We know that $d\bar{G}=\left(\frac{\partial \bar{G}}{\partial T}\right)_PdT+\left(\frac{\partial \bar{G}}{\partial P}\right)_TdP$ and that for a phase fixed in amount and composition that: $d\bar{G}=-\bar{S}dT+\bar{V}dP$
+
+This allows us to say that: $\left(\frac{\partial \bar{G}}{\partial T}\right)_P=-\bar{S}$ and that $\left(\frac{\partial \bar{G}}{\partial P}\right)_T=\bar{V}$
+
+We know that for an exact differential the order of differentiation doesn't matter so we get the following Maxwell relationship:
+
+$$\left[\frac{\partial}{\partial P}\left(\frac{\partial \bar{G}}{\partial T}\right)_P\right]_T=\left[\frac{\partial}{\partial T}\left(\frac{\partial \bar{G}}{\partial P}\right)_T\right]_P$$
+
+So now we can simplify using our alternate definition of $\bar{G}$ for phases with fixed compositions and amounts: $\frac{\partial}{\partial P}\left(-\bar{S}\right)_T=\frac{\partial}{\partial T}\left(\bar{V}\right)_P$
+
+Now we have: $-\left(\frac{\partial \bar{S}}{\partial P}\right)_T=\left(\frac{\partial \bar{V}}{\partial T}\right)_P$ where $\left(\frac{\partial \bar{S}}{\partial P}\right)_T$ is a quantity that we want to make easier/measureable and $\left(\frac{\partial \bar{V}}{\partial T}\right)_P$ is way easier and can be experimentally evaluated.
+
+So really now we have: $-\left(\frac{\partial \bar{S}}{\partial P}\right)_T=\left(\frac{\partial \bar{V}}{\partial T}\right)_P=-\bar{V}\alpha$ where (as before) $\alpha$ is the coefficient of thermal expansion.
+
+As of now, we have a few useful but currently disparate equations:
+
+$$d\bar{H}=\bar{C_P}dT+\left[\bar{V}-T\bar{V}\alpha\right]dP$$
+
+$$\bar{H_j}^{P_f,T_f}=\bar{H_j}^{P_0,T_0}+\int^{T_f}_{T_0}\bar{C_{P,j}}dT+\int_{P_0}^{P_f}\left[\bar{V_j}-T\bar{V_j}\alpha_j\right]dP$$
+
+$$\bar{S_j}^{P_f,T_f}=\bar{S_j}^{P_0,T_0}+\int^{T_f}_{T_0}\left(\frac{\partial \bar{S_j}}{\partial T}\right)_PdT+\int^{P_f}_{P_0}\left(\frac{\partial \bar{S_j}}{\partial P}\right)_TdP=\bar{S_j}^{P_0,T_0}+\int^{T_f}_{T_0}\frac{\bar{C_{P,j}}}{T}dT+\int^{P_f}_{P_0}-\bar{V_j}\alpha_jdP$$
+
+So now let's put it all together starting from: $G=H-TS$
+
+We can get more specific and say that $\bar{G_j}^{P_f,T_f}=\bar{H_j}^{P_f,T_f}-T_f\bar{S_j}^{P_f,T_f}$
+
+Now we can substitute in the equations for $\bar{H_j}^{P_f,T_f}$ and $\bar{S_j}^{P_f,T_f}$ from above to get:
+
+$$\bar{G_j}^{P_f,T_f}=\bar{H_j}^{P_0,T_0}-T_f\bar{S_j}^{P_0,T_0}+\int^{T_f}_{T_0}\bar{C_{P,j}}dT-\int^{T_f}_{T_0}\frac{\bar{C_{P,j}}}{T}dT+\int^{P_f}_{P_0}\left[\bar{V_j}(1-T_f\alpha_j)+\bar{V_j}\alpha_jT_f\right]dP$$
+
+Happily the last term collapses beautifully and shortens that a bit: $\left[\bar{V_j}(1-T_f\alpha_j)+\bar{V_j}\alpha_jT_f\right]=\bar{V_j}$
+
+Now let's go back and look at what we did.
+
+We came up with a way to integrate from a reference set of conditions ($T_0$ and $P_0$) to a final set of conditions ($T_f$ and $P_f$).
+
+```{r, echo=FALSE}
+df<-data.frame(temps=c(298,298+5,298+5),press=c(1,1,1.5))
+ggplot(df,aes(x=temps,y=press))+
+  geom_point()+
+  xlab("Temperature")+
+  ylab("Pressure")+
+  annotate("text",x=298,y=1.02,label=TeX("$\\bar{G}_j^{P_0,T_0}$",output="character"),parse=T)+
+  annotate("text",x=303,y=1.52,label=TeX("$\\bar{G}_j^{P_f,T_f}$",output="character"),parse=T)+
+  annotate("text",x=303.25,y=1,label=TeX("$\\bar{G}_j^{P_0,T_f}$",output="character"),parse=T)+
+  annotate("point",x=298,y=1,color="forestgreen",size=2)+
+  scale_x_continuous(breaks=c(298,303),labels=c(TeX("T_0"),TeX("T_f")))+
+  scale_y_continuous(breaks=c(1,1.5),labels=c(TeX("P_0"),TeX("P_f")))+
+  geom_segment(aes(x=298,y=1,xend=303,yend=1),linetype="dashed",color="blue")+
+  geom_segment(aes(x=303,y=1,xend=303,yend=1.5),linetype="dashed",color="red")
+```
+
+If we break down the original equation for $\bar{G_j}^{P_f,T_f}$ into parts, we will see that they match up with portions of the graph.
+
+$$\bar{G_j}^{P_f,T_f}=\color{teal}{\bar{G_j}^{P_0,T_0}}+\color{blue}{\displaystyle\int^{T_f}_{T_0}\left(\frac{\partial \bar{G_j}}{\partial T}\right)_{P_0}dT}+\color{red}{\displaystyle\int^{P_f}_{P_0}\left(\frac{\partial \bar{G_j}}{\partial P}\right)_{T_f}dP}$$
+
+or in our expanded equation for $\bar{G_j}^{P_f,T_f}$:
+
+$$\bar{G_j}^{P_f,T_f}=\color{teal}{\bar{H_j}^{P_0,T_0}-T_f\bar{S_j}^{P_0,T_0}}+\color{blue}{\int^{T_f}_{T_0}\bar{C_{P,j}}dT-\int^{T_f}_{T_0}\frac{\bar{C_{P,j}}}{T}dT}+\color{red}{\int^{P_f}_{P_0}\left[\bar{V_j}(1-T_f\alpha_j)+\bar{V_j}\alpha_jT_f\right]dP}$$
+
+#### Explicit case
+Now let's attempt to show how we would do this for an explicit $\bar{C_P}$ and $\bar{V}$
+
+We know that the generalized version of the third condition of heterogeneous equilibrium: $\displaystyle\sum_i\nu_i\mu_{i,j}^{P,T}=0$ becomes $\displaystyle\sum_i\nu_i\bar{G_j}^{P,T}=0$ because:
+
+1. $\mu_{i,j}^{P,T}=\bar{G_j}^{P,T}$
+2. because our phases are pure substances there is no distinction between the phase ($j$) and the phase component ($i$)
+
+Reminder that our stoichiometric reaction relationship (SRR) is: $3an-gr-2ky-qz=0$
+
+Now we can substitute in the $\bar{G_j}^{P_{eq},T_{eq}}$ of each phase: $3\bar{G_{an}}^{P_{eq},T_{eq}}-\bar{G_{gr}}^{P_{eq},T_{eq}}-2\bar{G_{ky}}^{P_{eq},T_{eq}}-\bar{G_{qz}}^{P_{eq},T_{eq}}=0$
+
+We can solve this by picking an equilibrium temperature and finding the pressure for which this statement is satisfied.
+
+We need the functions relating the heat capacity and temperature and the molar volume with temperature and pressure (here from Holland and Powell 1990):
+
+$$\bar{C_P}(T)=a+bT+cT^{-2}+dT^{-1/2}$$
+
+and
+
+$$\bar{V}(P,T)=\bar{V_j}^{P_0,T_0}+\alpha V\left[T-T_0\right]-\beta V\left[P-P_0\right]$$
+
+where both $\alpha V$ and $\beta V$ are constants
+
+#### Thermodynamic delta notation
+To simplify our very long equation we will use thermodynamic "delta" notation defined as, for any variable $z$: $\Delta z\equiv\displaystyle\sum_i\nu_iz_i$
+
+For example the third condition of heterogeneous equilibrium: $\displaystyle\sum_j\nu_j\bar{G_j}^{P,T}=\Delta\bar{G}^{P,T}$
+
+Or: $\Delta\bar{V}^{P_0,T_0}=3\bar{V}_{an}^{P_0,T_0}-\bar{V}_{gr}^{P_0,T_0}-2\bar{V}^{P_0,T_0}_{ky}-\bar{V}^{P_0,T_0}_{qz}$
+
+
+#### Back to the explicit case
+So now: $3\bar{G_{an}}^{P_{eq},T_{eq}}-\bar{G_{gr}}^{P_{eq},T_{eq}}-2\bar{G_{ky}}^{P_{eq},T_{eq}}-\bar{G_{qz}}^{P_{eq},T_{eq}}=\Delta\bar{G}^{P_{eq},T_{eq}}=0$
+
+And our painfully long equation is:
+
+\begin{multline*}
+\bar{G}^{P_{eq},T_{eq}}=\Delta\bar{H}^{P_0,T_0}-T_{eq}\Delta\bar{S}^{P_0,T_0}\\+\int^{T_{eq}}_{T_0}\left[\Delta a+\Delta bT+\Delta cT^{-2}+\Delta dT^{-1/2}\right]dT\\-T_{eq}\int^{T_{eq}}_{T_0}\left[\Delta aT^{-1}+\Delta b+\Delta cT^{-3}+\Delta dT^{-3/2}\right]dT\\+\int^{P_{eq}}_{P_0}\left[\Delta\bar{V}^{P_0,T_0}+\Delta\alpha V\left[T_{eq}-T_0\right]-\Delta\beta V\left[P_{eq}-P_0\right]\right]dP\\=0
+\end{multline*}
+
+
+Luckily none of the integrals above are difficult to solve.
+
+This allows us to do 2 things:
+
+1. determine the average temperature/pressure of a rock
+2. make phase diagrams
+
+#### Translation key (Boz to Holland and Powell 1990)
+|Boz|H&P 1990|
+|:--|:-------|
+|$\bar{H}^{P_0,T_0}$|$\Delta_fH$|
+|$\bar{S}^{P_0,T_0}$|$S$|
+|$\bar{V}^{P_0,T_0}$|$V$|
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
