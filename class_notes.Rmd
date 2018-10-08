@@ -997,6 +997,98 @@ This allows us to do 2 things:
 |$\bar{S}^{P_0,T_0}$|$S$|
 |$\bar{V}^{P_0,T_0}$|$V$|
 
+## October 8th 2018
+We are at a point where we can calculate the locus of temperatures and pressures at which a pure mineral system is at equilibrium.
+
+$$\bar{G_j}^{P_f,T_f}={\bar{H_j}^{P_0,T_0}-T_f\bar{S_j}^{P_0,T_0}}+{\int^{T_f}_{T_0}\bar{C_{P,j}}dT-\int^{T_f}_{T_0}\frac{\bar{C_{P,j}}}{T}dT}+{\int^{P_f}_{P_0}\left[\bar{V_j}(1-T_f\alpha_j)+\bar{V_j}\alpha_jT_f\right]dP}$$
+
+It turns out that this expression is valid for all pure substance (not just minerals) and we'll get to this next week, but the general gist is that fluids have more complicated $\bar{V}(P)$ relationships.
+
+We got here through the definition of Gibbs free energy ($G=H-TS$) which we were concerned with because we had realized that there was a key relationship between the $\Delta G$ and the chemical potential $\mu$.
+
+We realized that we could write $\displaystyle\sum_j\nu_j\bar{G_j}^{P_{eq},T_{eq}}=0$ as $\Delta\bar{G}^{P_{eq},T_{eq}}=0$
+
+A reminder here of the definition of the thermodynamic delta notation: $\Delta z=\displaystyle\sum_j\nu_jz_j$. $\Delta$ is shorthand for the stoichiometrically weighted sum.
+
+To get to our $\Delta\bar{G}$ definition we had to realize that: $\mu_j^{P_{eq},T_{eq}}=\bar{G_j}^{P_{eq},T_{eq}}$ for pure substances. Meaning that for pure substances we have no distinction between the phase components ($i$) and the phases themselves ($j$).
+
+And we started this whole adventure with the 3rd condition of heterogenous equilibrium: $\displaystyle\sum_i\nu_i\mu_{i,j}^{P_{eq},T_{eq}}=0$
+
+Our goal for this course is to explore the third condition of heterogeneous equilibrium for increasingly complex systems.
+
+These steps (laid out in reverse order above) take a general form and make it explicit for a system of interest.
+
+Back to our big painful $\bar{G}^{P_{eq},T_{eq}}$ equation: the solution to this is a locus of temperature and pressure points corresponding to a minimum in the Gibbs free energy in your system of pure substances aka a phase equilibrium curve.
+
+### Example: an-gr-ky-qz
+```{r, echo=FALSE}
+df<-data.frame(temps=c(298,298+2.5,298+5),press=c(1,1.25,1.5))
+ggplot(df,aes(x=temps,y=press))+
+  geom_line()+
+  xlab("Temperature")+
+  ylab("Pressure")+
+  annotate("text",x=299,y=1.4,label=TeX("gr-ky-qz",output="character"),parse=T)+
+  annotate("text",x=302,y=1.1,label=TeX("an",output="character"),parse=T)+
+  annotate("text",x=300,y=1.22,label=TeX("$\\Delta\\bar{G}^{P_{eq},T_{eq}}=0=f(P,T)",output="character"),parse=T,angle=35)
+```
+
+A rock containing an-gr-ky-qz is _assumed_ to represent a fossil equilibrium state. And that fossil equilibrium state is _assumed_ to represent the temperature and pressure conditions of crystallization.
+
+There is a lot of experimental data on this. You can construct an experimental phase diagram:
+
+```{r, echo=FALSE}
+df<-data.frame(temps=c(298,298+2.5,298+5),press=c(1,1.25,1.5))
+ggplot(df,aes(x=temps,y=press))+
+  geom_line(linetype="dashed")+
+  xlab("Temperature")+
+  ylab("Pressure")+
+  annotate("rect",xmin=298.9,xmax=299.1,ymin=1,ymax=1.075,color="blue",fill="blue")+
+  annotate("rect",xmin=299.9,xmax=300.1,ymin=1.1,ymax=1.175,color="blue",fill="blue")+
+  annotate("rect",xmin=300.9,xmax=301.1,ymin=1.2,ymax=1.275,color="blue",fill="blue")+
+  annotate("rect",xmin=301.9,xmax=302.1,ymin=1.3,ymax=1.375,color="blue",fill="blue")+
+  annotate("rect",xmin=298.9,xmax=299.1,ymin=1.125,ymax=1.2,color="red",fill="red")+
+  annotate("rect",xmin=299.9,xmax=300.1,ymin=1.225,ymax=1.3,color="red",fill="red")+
+  annotate("rect",xmin=300.9,xmax=301.1,ymin=1.325,ymax=1.4,color="red",fill="red")+
+  annotate("rect",xmin=301.9,xmax=302.1,ymin=1.425,ymax=1.5,color="red",fill="red")+
+  annotate("rect",xmin=302.4,xmax=302.6,ymin=1.,ymax=1.05,color="red",fill="red")+
+  annotate("rect",xmin=302.4,xmax=302.6,ymin=1.05,ymax=1.1,color="blue",fill="blue")+
+  annotate("text",x=302.9,y=1.025,label=TeX("gr-ky-qz",output="character"),parse=T)+
+  annotate("text",x=302.9,y=1.075,label=TeX("an",output="character"),parse=T)
+```
+
+This can then be used to develop databases of parameters (like $\Delta\bar{H}^{P_0,T_0}$, $\Delta\bar{S}^{P_0,T_0}$, $\Delta\bar{C_P}$)
+
+For a discussion of the relationship between theoretical and experimental phase diagrams see Berman 1988.
+
+### Examples \ch{Al2SiO5}
+
+```{r, echo=FALSE, message=FALSE,warning=FALSE}
+df<-data.frame(temps=c(298,299,300,301,302),ky_press=c(1,1.25,1.5,NA,NA),ky_press2=c(NA,NA,1.5,1.75,2),sill_press=c(NA,NA,1.5,1.25,1),sill_press2=c(2,1.75,1.5,NA,NA),and_press=c(NA,NA,1.5,2,NA),and_press2=c(NA,1,1.5,NA,NA))
+ggplot(df,aes(x=temps))+
+  geom_line(mapping=aes(y=ky_press))+
+  geom_line(mapping=aes(y=ky_press2),linetype="dashed")+
+  geom_line(mapping=aes(y=sill_press),color="blue")+
+  geom_line(mapping=aes(y=sill_press2),color="blue",linetype="dashed")+
+  geom_line(mapping=aes(y=and_press),color="red")+
+  geom_line(mapping=aes(y=and_press2),color="red",linetype="dashed")+
+  xlab("Temperature")+
+  ylab("Pressure")+
+  annotate("text",x=298.5,y=1.5,label=TeX("ky",output="character"),parse=T)+
+  annotate("text",x=301.5,y=1.5,label=TeX("sill",output="character"),parse=T)+
+  annotate("text",x=300,y=1.1,label=TeX("and",output="character"),parse=T)+
+  annotate("text",x=301.5,y=1.9,label=TeX("ky=and",output="character"),parse=T,angle=32)+
+  annotate("text",x=298.5,y=1.9,label=TeX("and=sill",output="character"),parse=T,angle=-32)+
+  annotate("text",x=300.5,y=1.8,label=TeX("ky=sill",output="character"),parse=T,angle=47)+
+  geom_point(mapping=aes(x=300,y=1.5),color="forestgreen")
+```
+
+There are two primary techniques to determine the temperature and pressure of crystallization:
+
+1. pigeonhole the rock (aka pseudosections). Example: only find andalusite so it must be in the temperature and pressure space indicated above for andalusite
+2. pick up sticks method (aka average temperature and pressure method). Look at the intersection of the phase equilibrium curves
+
+Obviously this isn't really how reality works, so we find polymorphs coexisting at more than the exceptionally specific conditions implied by phase equilibrium curves. This is largely due to kinetics and minor element constituents that stabilize.
+
 # Definitions
 Component: chemical formula used to describe the composition of a phase
 
