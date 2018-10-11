@@ -1,0 +1,84 @@
+---
+title: "Problem Set 1"
+author: "Jennifer Reeve"
+date: "October 1, 2018"
+output: pdf_document
+header-includes:
+  \usepackage{chemformula}
+  \usepackage{amsmath}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Due Oct 15, show all work and state any assumptions.
+
+```{r table inputs, echo=FALSE}
+system<-data.frame(mineral=c("an","gr","ky","q"),
+                   thermal_expanse=c(14.3,30.0,11.2,8.0),
+                   compress=c(13.0,7.9,1.9,5.9),
+                   a=c(0.3914,0.7286,.3039,.0979),
+                   b=c(1.2556,-4.0986,-1.3390,-.3350)*10^-5,
+                   c=c(-3036.2,-3128.0,-895.2,-636.2),
+                   d=c(-2.5832,-6.0774,-2.9040,-.7740),
+                   S=c(199.3,256.0,82.3,41.5)*10^-3,
+                   V=c(10.079,12.535,4.414,2.269))
+```
+
+## Question 1: Thermodynamic Units
+Convert thermodynamic units for volume (J/bar) into something more intuitive. Use the attached data table (Table 7 from Holland and Powell 1990) to determine the molar volume of *an* (\ch{CaAl2Si2O8}), $\bar{V_{an}}$ at 1 bar, 25C. Express the volume of one mole of *an* in terms of the volume of a common familiar object.
+
+$\bar{V}=\frac{J}{bar}$
+
+$J=\frac{kg*m^2}{s^2}$
+
+$bar=100,000 Pa$
+
+$Pa=\frac{kg}{m*s^2}$
+
+$\bar{V}=\frac{\frac{kg*m^2}{s^2}}{100,000\frac{kg}{m*s^2}}=\frac{1}{100,000}m^3$
+
+The molar volume of *an* at standard pressure and temperature (1 bar, 25C) is $10.079 \frac{J}{bar}$ or $1.0079*10^{-4} m^3$. To put this in perspective, a gallon is $3.79*10^{-3} m^3$ so 37.6 molar volumes of *an* would fit in one gallon.
+
+```{r question 1, echo=FALSE,include=FALSE,message=FALSE}
+gallon<-3.79e-3
+an<-1.007e-4
+aningallon<-gallon/an
+```
+
+## Question 2: Compressibility and thermal expansion
+One expression of the molar volume ($\bar{V_j}$) of a pure substance ($j$) as a function of pressure and temperature is (Holland and Powell 1990): $\bar{V_j}(P,T)=\bar{V_j}^{P_0,T_0}+\alpha V * (T-T_0)-\beta V*(P-P_0)$
+
+Use this expression to show that $(\frac{\partial \bar{V_j}}{\partial T})_P$ and $(\frac{\partial \bar{V_j}}{\partial P})_T$ are constant. [Note that $\alpha V$ and $\beta V$ are each single constant parameters in this expression.]
+
+For this expression, all of the terms in blue below are constants under all circumstances, the terms in red are constants for $(\frac{\partial \bar{V_j}}{\partial T})_P$ and the terms in green are constants for $(\frac{\partial \bar{V_j}}{\partial P})_T$
+
+$$\bar{V_j}(P,T)=\color{blue}{\bar{V_j}^{P_0,T_0}}+\color{blue}{\alpha V} * (\color{green}{T}-\color{blue}{T_0})-\color{blue}{\beta V}*(\color{red}{P}-\color{blue}{P_0})$$
+
+So if we take the derivative of the molar volume with respect to temperature holding pressure constant then all terms in blue or red are constants and thus their derivatives are $0$, leaving us with only the derivative of the middle term:
+
+$$(\frac{\partial \bar{V_j}}{\partial T})_P=0+\frac{d\alpha V T}{dT} -0-0=\alpha V$$
+
+And for the derivative of the molar volume with respect to pressure holding temperature constant all of the terms in blue or green are constants so:
+
+$$(\frac{\partial \bar{V_j}}{\partial P})_T=0+0-\frac{d\beta VP}{dP}+0=-\beta V$$
+
+And as established above, both $\alpha V$ and $-\beta V$ are constants.
+
+## Question 3: Equations of state
+Use the equation of state for volumes of pure substances from Holland and Powell (1990) and the attached data table (Table 7 from Holland and Powell 1990) to calculate how (i) the molar volume, (ii) thermal expansion, and (iii) compressibility of *an* change along a typical geothermal gradient ($\approx \frac{25C}{km}$) between surface conditions (1 bar and 25C) and those at 35km depth. Plot your results.
+
+```{r question 3}
+
+
+```
+
+## Question 4: Third condition of heterogeneous equilibrium for pure substances
+Calculate and plot the pressure-temperature conditions of the *gr-ky-qz-an* equilibrium from the data in the attached table (Table 7 from Holland and Powell 1990). Only consider $T>500C$ and $P<25kbar$. [Note that Holland and Powell 1990 use the symbol *q* for \ch{SiO2}.]
+
+```{r question 4}
+
+```
+
+## Question 5: Thermodynamic simplifications
+Your plot in Question 4 should be very nearly a straight line in $P-T$ space. Discuss how this result might enable you to simplify the expression you used to make your calculations in Question 4. [Hint: are there any terms that you can ignore? Why?]
