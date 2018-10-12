@@ -10,10 +10,11 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library("tidyverse")
 ```
 Due Oct 15, show all work and state any assumptions.
 
-```{r table inputs, echo=FALSE}
+```{r table inputs}
 system<-data.frame(mineral=c("an","gr","ky","q"),
                    thermal_expanse=c(14.3,30.0,11.2,8.0),
                    compress=c(13.0,7.9,1.9,5.9),
@@ -22,7 +23,8 @@ system<-data.frame(mineral=c("an","gr","ky","q"),
                    c=c(-3036.2,-3128.0,-895.2,-636.2),
                    d=c(-2.5832,-6.0774,-2.9040,-.7740),
                    S=c(199.3,256.0,82.3,41.5)*10^-3,
-                   V=c(10.079,12.535,4.414,2.269))
+                   V=c(10.079,12.535,4.414,2.269),
+                   H=c(-4232.74,-6638.30,-2595.33,-910.80))
 ```
 
 ## Question 1: Thermodynamic Units
@@ -40,7 +42,7 @@ $\bar{V}=\frac{\frac{kg*m^2}{s^2}}{100,000\frac{kg}{m*s^2}}=\frac{1}{100,000}m^3
 
 The molar volume of *an* at standard pressure and temperature (1 bar, 25C) is $10.079 \frac{J}{bar}$ or $1.0079*10^{-4} m^3$. To put this in perspective, a gallon is $3.79*10^{-3} m^3$ so 37.6 molar volumes of *an* would fit in one gallon.
 
-```{r question 1, echo=FALSE,include=FALSE,message=FALSE}
+```{r question 1}
 gallon<-3.79e-3
 an<-1.007e-4
 aningallon<-gallon/an
@@ -68,17 +70,132 @@ And as established above, both $\alpha V$ and $-\beta V$ are constants.
 ## Question 3: Equations of state
 Use the equation of state for volumes of pure substances from Holland and Powell (1990) and the attached data table (Table 7 from Holland and Powell 1990) to calculate how (i) the molar volume, (ii) thermal expansion, and (iii) compressibility of *an* change along a typical geothermal gradient ($\approx \frac{25C}{km}$) between surface conditions (1 bar and 25C) and those at 35km depth. Plot your results.
 
-```{r question 3}
+```{r question 3 setup}
+depth<-seq(0,35,by=0.5)
+temp<-depth*25+25+273.15
+press<-depth*(10/35)+1*10^-3
+```
 
+$$\bar{V_j}^{P,T}=\bar{V_j}^{P_0,T_0}+\alpha V[T-T_0]-\beta V[P-P_0]$$
 
+```{r question 3 molar volume calc}
+molar_volume<-
+  system$V[1]+
+  system$thermal_expanse[1]*10^-5*(temp-temp[1])-
+  system$compress[1]*10^-3*(press-press[1])
+```
+
+$$\alpha_j\equiv\frac{1}{\bar{V_j}}\left(\frac{\partial \bar{V_j}}{\partial T}\right)_P$$
+
+Where $\alpha_j$ is the coefficient given by Holland and Powell (1990). So to get the thermal expansion we need to multiply $\alpha_j$ by the molar volume of phase $j$.
+
+```{r question 3 thermal expansion calc}
+thermal_expansion<-system$thermal_expanse[1]*10^-5*molar_volume
+```
+
+$$\beta_j\equiv\frac{-1}{\bar{V_j}}\left(\frac{\partial \bar{V_j}}{\partial P}\right)_T$$
+
+Where $\beta_j$ is the coefficient given by Holland and Powell (1990). So to get the compressibility we need to multiply $\beta_j$ by the negative molar volume of phase $j$.
+
+```{r question 3 compressibility calc}
+compressibility<-system$compress[1]*10^-3*-1*molar_volume
+```
+
+```{r question 3 plotting}
+q3_an<-data.frame(depth=depth,
+                  temperature=temp,
+                  pressure=press,
+                  molar_volume=molar_volume,
+                  thermal_expansion=thermal_expansion,
+                  compressibility=compressibility)
+
+ggplot(q3_an,aes(x=molar_volume,y=depth))+
+  geom_point()+
+  scale_y_reverse()+
+  labs(x="Molar Volume (kJ/kbar)",y="Depth (km)")
+ggplot(q3_an,aes(x=thermal_expansion,y=depth))+
+  geom_point()+
+  scale_y_reverse()+
+  labs(x="Thermal Expansion",y="Depth (km)")
+ggplot(q3_an,aes(x=compressibility,y=depth))+
+  geom_point()+
+  scale_y_reverse()+
+  labs(x="Compressibility",y="Depth (km)")
 ```
 
 ## Question 4: Third condition of heterogeneous equilibrium for pure substances
 Calculate and plot the pressure-temperature conditions of the *gr-ky-qz-an* equilibrium from the data in the attached table (Table 7 from Holland and Powell 1990). Only consider $T>500C$ and $P<25kbar$. [Note that Holland and Powell 1990 use the symbol *q* for \ch{SiO2}.]
 
 ```{r question 4}
+# calculating all the deltas
+deltaH<-3*system$H[1]-
+  system$H[2]-
+  2*system$H[3]-
+  system$H[4]
+deltaS<-10^-3*
+  (3*system$S[1]-
+  system$S[2]-
+  2*system$S[3]-
+  system$S[4])
+deltaV<-3*system$V[1]-
+  system$V[2]-
+  2*system$V[3]-
+  system$V[4]
+deltaa<-3*system$a[1]-
+  system$a[2]-
+  2*system$a[3]-
+  system$a[4]
+deltab<-10^-5*
+  (3*system$b[1]-
+  system$b[2]-
+  2*system$b[3]-
+  system$b[4])
+deltac<-3*system$c[1]-
+  system$c[2]-
+  2*system$c[3]-
+  system$c[4]
+deltad<-3*system$d[1]-
+  system$d[2]-
+  2*system$d[3]-
+  system$d[4]
+deltathermal<-10^-5*
+  (3*system$thermal_expanse[1]-
+  system$thermal_expanse[2]-
+  2*system$thermal_expanse[3]-
+  system$thermal_expanse[4])
+deltacompress<-10^-3*
+  (3*system$compress[1]-
+  system$compress[2]-
+  2*system$compress[3]-
+  system$compress[4])
 
+# setting up a variable of temperatures to solve for the equilibrium pressure
+temp<-seq(500+273.15,5000+273.15,by=100) # in K
+
+#setting the initial temp and pressure
+init_temp<-25+273.15
+init_press<-1*10^-3
+
+# defining the terms of our polynomial
+a<-deltaH+temp*deltaS+
+  deltaa*temp+0.5*deltab*temp^2-1*deltac*temp^-1+2*deltad*temp^0.5-
+  temp*(deltaa*log(temp)+deltab*temp-0.5*deltac*temp^-2-2*deltad*temp^-0.5)
+b<-deltaV+deltathermal*(temp-init_temp)-deltacompress*init_press
+c<--0.5*deltacompress
+#solving the polynomial
+press_plus<-(-b+sqrt(b^2-4*a*c))/2*a # in kbar
+press_minus<-(-b-sqrt(b^2-4*a*c))/2*a #these are all negatives so don't actually matter here
+
+#making a data frame of the temperatures and pressures of equilibrium
+tp<-data.frame(temp,press_plus)
+
+# plotting the temperatures and pressures of equilibrium
+ggplot(tp,aes(x=temp,y=press_plus))+geom_point()+labs(x="Temperature (K)",y="Pressure (kbar)")
 ```
 
 ## Question 5: Thermodynamic simplifications
 Your plot in Question 4 should be very nearly a straight line in $P-T$ space. Discuss how this result might enable you to simplify the expression you used to make your calculations in Question 4. [Hint: are there any terms that you can ignore? Why?]
+
+```{r question 5}
+
+```
