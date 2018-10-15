@@ -125,7 +125,53 @@ ggplot(q3_an,aes(x=compressibility,y=depth))+
 ## Question 4: Third condition of heterogeneous equilibrium for pure substances
 Calculate and plot the pressure-temperature conditions of the *gr-ky-qz-an* equilibrium from the data in the attached table (Table 7 from Holland and Powell 1990). Only consider $T>500C$ and $P<25kbar$. [Note that Holland and Powell 1990 use the symbol *q* for quartz.]
 
-I have an error here that I can't seem to track down. At this point I've fixed a half dozen mistakes but can't fix the root problem.
+Derivations:
+
+$$\Delta\bar{G}^{P_{eq},T_{eq}}=\Delta\bar{H}^{P_0,T_0}-T_{eq}\Delta\bar{S}^{P_0,T_0}+\int^{T_{eq}}_{T_0}\Delta\bar{C_P}dT-T_{eq}\int^{T_{eq}}_{T_0}\frac{\Delta\bar{C_P}}{T}dT+\int^{P_{eq}}_{P_0}\Delta\bar{V}dP=0$$
+
+Breaking it down by term:
+
+1. $$\Delta\bar{H}^{P_0,T_0}=3*\bar{H_{an}}^{P_0,T_0}-\bar{H_{gr}}^{P_0,T_0}-2*\bar{H_{ky}}^{P_0,T_0}-\bar{H_{qz}}^{P_0,T_0}$$
+
+2. $$T_{eq}\Delta\bar{S}^{P_0,T_0}=T_{eq}\left(3*\bar{S_{an}}^{P_0,T_0}-\bar{S_{gr}}^{P_0,T_0}-2*\bar{S_{ky}}^{P_0,T_0}-\bar{S_{qz}}^{P_0,T_0}\right)$$
+
+3. \begin{multline*}
+\int^{T_{eq}}_{T_0}\Delta\bar{C_P}dT=\int^{T_{eq}}_{T_0}\left[\Delta a+\Delta bT+\Delta cT^{-2}+\Delta dT^{-1/2}\right]dT=\\\int^{T_{eq}}_{T_0}\Delta adT+\int^{T_{eq}}_{T_0}\Delta bTdT+\int^{T_{eq}}_{T_0}\Delta cT^{-2}dT+\int^{T_{eq}}_{T_0}\Delta dT^{-1/2}dT
+\end{multline*}
+
+$$\int^{T_{eq}}_{T_0}\Delta\bar{C_P}dT=\Delta a(T_{eq}-T_0)+\frac{1}{2}\Delta bT^2-\Delta cT^{-1}+2\Delta dT^{1/2}$$
+
+Mistake here, need to fix how I put the exponents and the $(T_{eq}-T_0)$ together here.
+
+4. 
+$$-T_{eq}\int^{T_{eq}}_{T_0}\frac{\Delta\bar{C_P}}{T}dT=-T_{eq}\left[\int^{T_{eq}}_{T_0}\frac{\Delta a}{T}dT+\int^{T_{eq}}_{T_0}\Delta bdT+\int^{T_{eq}}_{T_0}\Delta cT^{-3}dT+\int^{T_{eq}}_{T_0}\Delta dT^{-3/2}dT\right]$$
+
+$$-T_{eq}\int^{T_{eq}}_{T_0}\frac{\Delta\bar{C_P}}{T}dT=-T_{eq}\left[\Delta a  ln\left(\frac{T_{eq}}{T_0}\right)+\Delta b(T_{eq}-T_0)-\frac{1}{2}\Delta c\left(T_{eq}-T_0\right)^{-2}-2\Delta d\left(T_{eq}-T_0\right)^{-1/2} \right]$$
+
+5.
+$$\int^{P_{eq}}_{P_0}\bar{V}dP=\int^{P_{eq}}_{P_0}\bar{V}^{P_0,T_0}dP+\int^{P_{eq}}_{P_0}\Delta\alpha V\left[T-T_0\right]dP-\int^{P_{eq}}_{P_0}\Delta\beta V\left[P-P_0\right]dP$$
+
+$$\int^{P_{eq}}_{P_0}\bar{V}dP=\bar{V}^{P_0,T_0}\left[P_{eq}-P_0\right]+\Delta\alpha V\left[T-T_0\right]\left[P_{eq}-P_0\right]+\Delta\beta VP_0\left[P_{eq}-P_0\right]-\frac{1}{2}\Delta\beta V\left[P_{eq}-P_0\right]^2$$
+
+Noticing more mistakes as I go, will fix the incorrect placement of the ^2 later, but I think I continued with it done correctly, not like this.
+
+\begin{multline*}
+\int^{P_{eq}}_{P_0}\bar{V}dP=\\P_{eq}\left(\Delta\bar{V}^{P_0,T_0}+\Delta\alpha V\left[T-T_0\right]+\Delta\beta VP_0\right)-P_0\left(\Delta\bar{V}^{P_0,T_0}+\Delta\alpha V\left[T-T_0\right]+\Delta\beta VP_0-\frac{1}{2}\Delta\beta VP_0\right)-\frac{1}{2}\Delta\beta VP_{eq}^2
+\end{multline*}
+
+Now we group terms based on whether they lack any $P_{eq}$, have $P_{eq}$ or have $P_{eq}^2$ so that we can assign the terms of a polynomial as: $0=aP_{eq}^2+bP_{eq}+c$
+
+$$a=-\frac{1}{2}\Delta\beta V$$
+
+$$b=\Delta\bar{V}^{P_0,T_0}+\Delta\alpha V\left[T-T_0\right]+\Delta\beta VP_0$$
+
+\begin{multline*}
+c=\Delta\bar{H}^{P_0,T_0}-T_{eq}\Delta\bar{S}^{P_0,T_0}+\\\Delta a(T_{eq}-T_0)+\frac{1}{2}\Delta bT^2-\Delta cT^{-1}+2\Delta dT^{1/2}\\-T_{eq}\left[\Delta a  ln\left(\frac{T_{eq}}{T_0}\right)+\Delta b(T_{eq}-T_0)-\frac{1}{2}\Delta c\left(T_{eq}-T_0\right)^{-2}-2\Delta d\left(T_{eq}-T_0\right)^{-1/2} \right]\\-P_0\left(\Delta\bar{V}^{P_0,T_0}+\Delta\alpha V\left[T-T_0\right]+\Delta\beta VP_0-\frac{1}{2}\Delta\beta VP_0\right)
+\end{multline*}
+
+And finally we use the quadratic formula and these terms to solve for the pressure of equilibrium given a temperature of equilibrium.
+
+I have an error here that I can't seem to track down. At this point I've fixed a half dozen mistakes but can't fix the root problem. (Fixed an error where I put a + instead of a - for the $T_{eq}\Delta\bar{S}^{P_0,T_0}$ term since I handed this in this morning.)
 
 ```{r question 4}
 # calculating all the deltas
@@ -180,18 +226,18 @@ init_press<-1*10^-3
 # defining a variable of T-T0
 temp_diff<-temp-init_temp
 
-# defining the terms of our polynomial
+# defining the terms of our polynomial (a and c are switched here from what they are above b/c brain works)
 #a<-deltaH+temp*deltaS+
 #  deltaa*temp_diff+0.5*deltab*temp_diff^(2)-1*deltac*temp_diff^(-1)+2*deltad*temp_diff^(0.5)-
 #  temp*(deltaa*log(temp_diff)+deltab*temp_diff-0.5*deltac*temp_diff^(-2)-2*deltad*temp_diff^(-0.5))
 #b<-deltaV+deltathermal*(temp-init_temp)-deltacompress*init_press
 #c<-(-0.5)*deltacompress
 
-a<-deltaH+temp*deltaS+
+a<-deltaH-temp*deltaS+
   deltaa*temp_diff+0.5*deltab*temp_diff^(2)-1*deltac*temp_diff^(-1)+2*deltad*temp_diff^(0.5)-
   temp*(deltaa*log(temp_diff)+deltab*temp_diff-0.5*deltac*temp_diff^(-2)-2*deltad*temp_diff^(-0.5))-
   deltaV*init_press-deltathermal*temp_diff*init_press-0.5*deltacompress*init_press
-b<-deltaV+deltathermal*(temp-init_temp)-deltacompress*init_press
+b<-deltaV+deltathermal*(temp-init_temp)+deltacompress*init_press
 c<-(-0.5)*deltacompress
 #solving the polynomial
 press_plus<-
@@ -214,11 +260,11 @@ Most of the pressure integral can be avoided as the compressibility, thermal exp
 Obviously this suffers from the same error as Q4, but as can be seen, the error can't be in these areas as they make almost no difference.
 
 ```{r question 5}
-a<-deltaH+temp*deltaS+
+a<-deltaH-temp*deltaS+
   deltaa*temp_diff+0.5*deltab*temp_diff^(2)-1*deltac*temp_diff^(-1)+2*deltad*temp_diff^(0.5)-
   temp*(deltaa*log(temp_diff)+deltab*temp_diff-0.5*deltac*temp_diff^(-2)-2*deltad*temp_diff^(-0.5))#-
   # deltaV*init_press-deltathermal*temp_diff*init_press-0.5*deltacompress*init_press
-b<-deltaV#+deltathermal*(temp-init_temp)-deltacompress*init_press
+b<-deltaV#+deltathermal*(temp-init_temp)+deltacompress*init_press
 c<-(-0.5)*deltacompress
 #solving the polynomial
 press_plus<-
