@@ -4,7 +4,6 @@ author: "Jennifer Reeve"
 date: "October 1, 2018"
 output: pdf_document
 header-includes:
-  \usepackage{chemformula}
   \usepackage{amsmath}
 ---
 
@@ -28,7 +27,7 @@ system<-data.frame(mineral=c("an","gr","ky","q"),
 ```
 
 ## Question 1: Thermodynamic Units
-Convert thermodynamic units for volume (J/bar) into something more intuitive. Use the attached data table (Table 7 from Holland and Powell 1990) to determine the molar volume of *an* (\ch{CaAl2Si2O8}), $\bar{V_{an}}$ at 1 bar, 25C. Express the volume of one mole of *an* in terms of the volume of a common familiar object.
+Convert thermodynamic units for volume (J/bar) into something more intuitive. Use the attached data table (Table 7 from Holland and Powell 1990) to determine the molar volume of *an*, $\bar{V_{an}}$ at 1 bar, 25C. Express the volume of one mole of *an* in terms of the volume of a common familiar object.
 
 $\bar{V}=\frac{J}{bar}$
 
@@ -124,7 +123,9 @@ ggplot(q3_an,aes(x=compressibility,y=depth))+
 ```
 
 ## Question 4: Third condition of heterogeneous equilibrium for pure substances
-Calculate and plot the pressure-temperature conditions of the *gr-ky-qz-an* equilibrium from the data in the attached table (Table 7 from Holland and Powell 1990). Only consider $T>500C$ and $P<25kbar$. [Note that Holland and Powell 1990 use the symbol *q* for \ch{SiO2}.]
+Calculate and plot the pressure-temperature conditions of the *gr-ky-qz-an* equilibrium from the data in the attached table (Table 7 from Holland and Powell 1990). Only consider $T>500C$ and $P<25kbar$. [Note that Holland and Powell 1990 use the symbol *q* for quartz.]
+
+I have an error here that I can't seem to track down. At this point I've fixed a half dozen mistakes but can't fix the root problem.
 
 ```{r question 4}
 # calculating all the deltas
@@ -170,32 +171,65 @@ deltacompress<-10^-3*
   system$compress[4])
 
 # setting up a variable of temperatures to solve for the equilibrium pressure
-temp<-seq(500+273.15,5000+273.15,by=100) # in K
+temp<-seq(500+273.15,1000+273.15,by=10) # in K
 
 #setting the initial temp and pressure
 init_temp<-25+273.15
 init_press<-1*10^-3
 
+# defining a variable of T-T0
+temp_diff<-temp-init_temp
+
 # defining the terms of our polynomial
+#a<-deltaH+temp*deltaS+
+#  deltaa*temp_diff+0.5*deltab*temp_diff^(2)-1*deltac*temp_diff^(-1)+2*deltad*temp_diff^(0.5)-
+#  temp*(deltaa*log(temp_diff)+deltab*temp_diff-0.5*deltac*temp_diff^(-2)-2*deltad*temp_diff^(-0.5))
+#b<-deltaV+deltathermal*(temp-init_temp)-deltacompress*init_press
+#c<-(-0.5)*deltacompress
+
 a<-deltaH+temp*deltaS+
-  deltaa*temp+0.5*deltab*temp^2-1*deltac*temp^-1+2*deltad*temp^0.5-
-  temp*(deltaa*log(temp)+deltab*temp-0.5*deltac*temp^-2-2*deltad*temp^-0.5)
+  deltaa*temp_diff+0.5*deltab*temp_diff^(2)-1*deltac*temp_diff^(-1)+2*deltad*temp_diff^(0.5)-
+  temp*(deltaa*log(temp_diff)+deltab*temp_diff-0.5*deltac*temp_diff^(-2)-2*deltad*temp_diff^(-0.5))-
+  deltaV*init_press-deltathermal*temp_diff*init_press-0.5*deltacompress*init_press
 b<-deltaV+deltathermal*(temp-init_temp)-deltacompress*init_press
-c<--0.5*deltacompress
+c<-(-0.5)*deltacompress
 #solving the polynomial
-press_plus<-(-b+sqrt(b^2-4*a*c))/2*a # in kbar
-press_minus<-(-b-sqrt(b^2-4*a*c))/2*a #these are all negatives so don't actually matter here
+press_plus<-
+  (-b+sqrt((b^2)-(4*a*c)))/(2*c) # in kbar
+press_minus<-
+  (-b-sqrt((b^2)-(4*a*c)))/(2*c) #these are all negatives so don't actually matter here
 
 #making a data frame of the temperatures and pressures of equilibrium
 tp<-data.frame(temp,press_plus)
 
 # plotting the temperatures and pressures of equilibrium
-ggplot(tp,aes(x=temp,y=press_plus))+geom_point()+labs(x="Temperature (K)",y="Pressure (kbar)")
+ggplot(tp,aes(x=temp,y=press_minus))+geom_point()+labs(x="Temperature (K)",y="Pressure (kbar)")
 ```
 
 ## Question 5: Thermodynamic simplifications
 Your plot in Question 4 should be very nearly a straight line in $P-T$ space. Discuss how this result might enable you to simplify the expression you used to make your calculations in Question 4. [Hint: are there any terms that you can ignore? Why?]
 
+Most of the pressure integral can be avoided as the compressibility, thermal expansion and initial pressure are quite small and their effect is minimal on the terms in which they play a part.
+
+Obviously this suffers from the same error as Q4, but as can be seen, the error can't be in these areas as they make almost no difference.
+
 ```{r question 5}
+a<-deltaH+temp*deltaS+
+  deltaa*temp_diff+0.5*deltab*temp_diff^(2)-1*deltac*temp_diff^(-1)+2*deltad*temp_diff^(0.5)-
+  temp*(deltaa*log(temp_diff)+deltab*temp_diff-0.5*deltac*temp_diff^(-2)-2*deltad*temp_diff^(-0.5))#-
+  # deltaV*init_press-deltathermal*temp_diff*init_press-0.5*deltacompress*init_press
+b<-deltaV#+deltathermal*(temp-init_temp)-deltacompress*init_press
+c<-(-0.5)*deltacompress
+#solving the polynomial
+press_plus<-
+  (-b+sqrt((b^2)-(4*a*c)))/(2*c) # in kbar
+press_minus<-
+  (-b-sqrt((b^2)-(4*a*c)))/(2*c) #these are all negatives so don't actually matter here
+
+#making a data frame of the temperatures and pressures of equilibrium
+tp<-data.frame(temp,press_plus)
+
+# plotting the temperatures and pressures of equilibrium
+ggplot(tp,aes(x=temp,y=press_minus))+geom_point()+labs(x="Temperature (K)",y="Pressure (kbar)")
 
 ```
