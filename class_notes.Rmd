@@ -1089,6 +1089,178 @@ There are two primary techniques to determine the temperature and pressure of cr
 
 Obviously this isn't really how reality works, so we find polymorphs coexisting at more than the exceptionally specific conditions implied by phase equilibrium curves. This is largely due to kinetics and minor element constituents that stabilize.
 
+## October 10th 2018
+Let's look at a different way to define $\bar{G}$:
+
+From before $\mu_{i,j}=\left(\frac{\partial G_j}{\partial n_i}\right)_{P,T,n_{k\ne i}}$
+
+but we know that for a pure substance there is no distinction between the phases ($j$) and phase components ($i$) so: $\mu_j=\left(\frac{\partial G_j}{\partial n_j}\right)_{P,T,n_{k\ne j}}$
+
+Now we know that $\bar{G_j}=\frac{G_j}{n_j}$ so $G_j=n_j\bar{G_j}$ so: $\mu_j=\left(\frac{\partial n_j\bar{G_j}}{\partial n_j}\right)_{P,T,n_{k\ne j}}$
+
+If we use the product rule: $\mu_j=\bar{G_j}\color{blue}{\left(\frac{\partial n_j}{\partial n_j}\right)}+n_j\color{red}{\left(\frac{\partial \bar{G_j}}{\partial n_j}\right)}$. In this expression, the blue term is one (due to identity) and the red term is zero because $\bar{G_j}$ is an intensive variable which by definition will not vary with changes in $n_j$.
+
+So: $\mu_j=\bar{G_j}$ for pure substances.
+
+The image below shows what we have been thinking about in 3D space. Each phase (here $\alpha$ and $\beta$) has a surface of Gibbs free energy for the ranges of pressure and temperature. The equilibrium of these two phases occurs where their surfaces intersect. We have simply been looking at the intersection in 2D space and ignoring regions where the surfaces do not intersect. These intersections do not necessarily occur at constant $\bar{G_j}$!
+
+![Free energy surfaces](gibbs_surfaces.jpg)
+
+We can get information about the pure substances and the orientation of these surfaces in T,P space.
+
+$dG=-SdT+VdP$
+
+$\bar{G_j}^{P,T}=-\bar{S_j}^{P,T}T+\bar{V_j}^{P,T}P$
+
+$\Delta\mu^{P,T}=\Delta\bar{G}^{P,T}=-T\Delta\bar{S}^{P,T}+P\Delta\bar{V}^{P,T}$
+
+We know that $\Delta\bar{G}^{P,T}=0$ at equilibrium, so $P\Delta\bar{V}^{P,T}=T\Delta\bar{S}^{P,T}$ at equilibrium.
+
+$\frac{dP}{dT}=\frac{\Delta\bar{S}^{P,T}}{\Delta \bar{V}^{P,T}}$ Clapeyron equation (relevant for question 5 of problem set 1)
+
+Hierachy of thermodynamic data (from best known to worst known): $\bar{V}>\bar{S}=\bar{C_P}>\bar{H}$
+
+### Helpful tips/work on problem set 1 (from class time)
+
+$\alpha V\equiv\left(\frac{\partial\bar{V_j}}{\partial T}\right)_P$ and $-\beta V\equiv\left(\frac{\partial\bar{V_j}}{\partial P}\right)_T$ are both constants!
+
+Derivation work for question 4:
+
+$$\int_{P_0}^{P_{eq}}\Delta\bar{V_j}^{P_0,T_0}+\Delta\alpha V\left[T-T_0\right]-\Delta\beta V\left[P-P_0\right]dP$$
+Split it up (constants in blue)
+
+$$\int^{P_{eq}}_{P_0}\color{blue}{\Delta\bar{V_j}^{P_0,T_0}}\color{black}{}dP+\int^{P_{eq}}_{P_0}\color{blue}{\Delta\alpha V\left[T-T_0\right]}\color{black}{}dP-\int^{P_{eq}}_{P_0}\color{blue}{\Delta\beta V}\color{black}{}\left[P-\color{blue}{P_0}\color{black}{}\right]dP$$
+
+Move the constants out front:
+
+$$\Delta\bar{V_j}^{P_0,T_0}\int^{P_{eq}}_{P_0}dP+\Delta\alpha V\left[T-T_0\right]\int^{P_{eq}}_{P_0}dP-\Delta\beta V\int^{P_{eq}}_{P_0}PdP+\Delta\beta VP_0\int^{P_{eq}}_{P_0}dP$$
+
+Two key integration rules for this problem set: $\int x^ndx=\frac{1}{n+1}x^{n+1}$ and $\int\frac{1}{x}dx=ln(x)$
+
+So now we integrate:
+
+$$\Delta\bar{V_j}^{P_0,T_0}P+\Delta\alpha V\left[T-T_0\right]P-\frac{1}{2}\Delta\beta VP^2+\Delta\beta VP_0P$$
+
+This essentially gets us to a second-order polynomial in terms of P which means we can use the quadratic formula to solve this problem.
+
+## October 12 2018 Reaction Space aka stoichiometry
+Stepping back from thermodynamics and getting into accounting.
+
+How to determine the number of linearly independent stoichiometric reaction relationships (SRR) in a given system?
+
+Linearly independent like a coordinate system, you can't make x out of y.
+
+Consider a hydrothermally altered rhiolite as the system:
+
+|Phase|Phase components ($C_p$)|System components ($C_s$|
+|:----|:---------------|:----------------|
+|Muscovite|\ch{NaAl3Si3O0(OH)2}-ms|\ch{Na2O}|
+||\ch{KAl3Si3O10(OH)2}-pg|\ch{K2O}|
+|Alkali feldspar|\ch{NaAlSi3O8}-ab|\ch{CaO}|
+||\ch{KAlSi3O8}-or|\ch{Al2O3}|
+|Plagioclase feldspar|\ch{NaAlSi3O8}-ab|\ch{SiO2}|
+||\ch{CaAl2Si2O8}-an|\ch{Fe2O3}|
+|Quartz|\ch{SiO2}-qz|\ch{H2O}|
+|Epidote|\ch{CaAl3Si3O12(OH)}-zo||
+||\ch{CaAl2FeSi3O12(OH)}-ep||
+|Andalucite|\ch{Al2SiO3}-and||
+||\ch{AlFeSiO3}-feand||
+|fluid|\ch{H2O}-water||
+
+This system has 12 phase components and 7 system components. We have to consider the ab in the alkali and plagioclase feldspars differently.
+
+The system components are linearly independent so we have 5 SRRs to develop.
+
+Pick a system component:
+$n_{H_2O}=1n_{ms}+1n_{pg}+0n_{ab,alk}+0n_{or}+0n_{ab,plg}+0n_{an}+0n_{qz}+0.5n_{zo}+0.5n_{ep}+0n_{and}+0n_{feand}+1n_{water}$
+
+We could write one of these for every system component and make a messy matrix.
+
+In linear algebra we know that we can take a non-square matrix and make it square by adding equations that collapse the null spaces
+
+$n_{SRR}=C_p-C_s=12-7=5$
+
+we can also think about phase components in a different way that will allow us to ID the SRRs by inspection.
+
+Let's look at 'exchange' components:
+
+KCl (silvite) - NaCl (halite) are related by Na and K exchange.
+
+This is a crystal chemical substitution scheme. We take one end-member/component and hold it fixed (this is the additive end member) and swap out the other
+
+KCl is our additive component so $NaK_{-1}\equiv$ taking out one mole of K and adding one mole of Na.
+
+All exchange components must conserve charge
+
+$K_{0.2}Na_{0.8}Cl=KCl+0.8NaK_{-1}$
+
+Why is this useful? If we rewrite phase components as an additive component and an exchange component then we can change the composition of phases without changing their abundance.
+
+Potential exchange components: $NaK_{-1}$, $FeMg_{-1}$, $CaMg_{-1}$ or coupled sets: $CaAlNa_{-1}Si_{-1}$ (charges balance), $Al_2Mg_{-1}Si_{-1}$ (tschermak's exchange, named after the discoverer)
+
+We end up with 2 fundamental types of SRRs:
+
+Exchange reactions:
+
+- phases simply exchange elements
+- changes phase composition
+- doesn't change phase abundance
+
+Let's look at what this might represent: 2 phase system: $NaAlSi_3O_8+KCl\leftrightarrow KAlSi_3O_8+NaCl$
+
+Only the composition of the phases changes, Cl and \ch{AlSi3O8} are conserved so the phases have constant abundances.
+
+Isolating the process: $KNa_{-1}(salt)=KNa_{-1}(feldspar)$
+
+If we can go through the phase component list and write the exchange components then we can easily build our SRRs:
+
+|Phase|Exchange Component|
+|:----|:-----------------|
+|muscovite|$KNa_{-1}$|
+|alkali feldspar|$KNa_{-1}$|
+|plagioclase feldspar|$CaAlNa_{-1}Si_{-1}$|
+|epidote|$FeAl_{-1}$|
+|andalusite|$FeAl_{-1}$|
+
+There are two clear pairs: muscovite and alkali feldspar have an exchange reaction and epidote and andalusite have an exchange reaction. So now we have identified two of the five SRRs.
+
+The other type of SRR is the net transfer reaction:
+
+- involves at least 2 additive components
+- may involve exchange components
+- changes the phase abundance
+- can change the phase composition as well (true if involves exchange components)
+
+In our case we will have 3 net transfer reactions
+
+1. Structural rearrangement: $[NaAlSi_3O_8]_{alk}=[NaAlSi_3O_8]_{plg}$
+
+## October 15th 2018
+Again the 3rd condition of heterogeneous equilibrium:
+
+We've been talking about how to solve for solid minerals
+
+Over the rest of the class we are going to do this for:
+
+- molecular (uncharged) fluids
+- solutions (solids and fluids)
+- solutions (electrolytes) -> speciation and redox
+- solutions (biological) -> here we control for pH too, whole new energy function
+
+Starting with molecular fluids:
+
+$\mu_{i,j}^{P,T}=\mu_{i,j}^{1,T}+\displaystyle\int^P_1\left(\frac{\partial\mu_{i,j}}{\partial P}\right)_TdP$
+
+For a pure substance this is: $\mu_{i,j}^{P,T}=\mu_{i,j}^{1,T}+\displaystyle\int_1^P\left(\frac{\partial\bar{G_j}}{\partial P}\right)_TdP$
+
+As we have shown before: $\left(\frac{\partial\bar{G_j}}{\partial P}\right)_T=\bar{V_j}$
+
+So: $\mu_{i,j}^{P,T}=\mu_{i,j}^{1,T}+\displaystyle\int_1^P\bar{V_j}dP$
+
+For molecular fluids $\bar{V_j}$ is a strong function of T and P with changes in the 10s to 100s of percent over temperature and pressures ranges of interest
+
+
+
 # Definitions
 Component: chemical formula used to describe the composition of a phase
 
