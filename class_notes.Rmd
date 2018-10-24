@@ -1484,9 +1484,90 @@ The b term of the MRK is the amount of space that the molecules would take up if
 Pure solids have volume explicit equations of state, pure molecular fluids have pressure explicit equations of state
 
 ## October 22nd 2018
+$U^{V,T}=n\bar{U}^*+\displaystyle\int^\infty_V\left[P-T\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV$
+
+Let's review the steps to get here in terms of:
+
+1. What is the general form of the correction factor that we used to go from our $U^*$ to $U^{V,T}$?
+2. Why do we choose the reference state (T, P (ideal gas law)) that we do?
+3. How did we switch the limits of integration from $V^*$ to $V$ to $V$ to $\infty$?
+
+We are pursuing the definition of fugacity from an equation of state. We need to look at the Helmholtz free energy function: $A\equiv U-TS$ It takes the internal energy and corrects for the thermal effects. We go from the variables of $V$ and $S$ that define the internal energy to the variables of $V$ and $T$ which define the Helmholtze free energy. It refers to systems with boundaries that are rigid but conducting. It is the appropriate energy function for rigid vessels, aka most experimental setups.
+
+$A^{V,T}=\color{blue}{U^{V,T}}\color{black}{-T}\color{red}{S^{V,T}}$ where we have the blue term and need to figure out the red term.
+
+$S^{V,T}=S^*+\color{blue}{\displaystyle\int^V_{V^*}\left(\frac{\partial S}{\partial V}\right)_{n,T}dV}$ where the blue is the correction factor for entropy.
+
+1. $S^*=n\bar{S}^*$
+2. apply a Maxwell relation: $\left(\frac{\partial S}{\partial V}\right)_{n,T}=\left(\frac{\partial P}{\partial T}\right)_{n,V}$
+3. switch the limits of integration (to effectively remove the reference state for something we can always evaluate)
+
+$S^{V,T}=n\bar{S}^*-\displaystyle\int^\infty_V\left(\frac{\partial P}{\partial T}\right)_{n,V}dV+\displaystyle\int^V_{V^*}\left(\frac{\partial P}{\partial T}\right)_{n,V}dV$
+
+Again for $V>V^*$ the fluid follows the ideal gas law so $\left(\frac{\partial P}{\partial T}\right)_{n,V}=\frac{nR}{V}$
+
+$\displaystyle\int^\infty_{V^*}\frac{nR}{V}dV=\color{blue}{\displaystyle\int^\infty_V\frac{nR}{V}dV}-\color{red}{\displaystyle\int^{V^*}_V\frac{nR}{V}dV}$
+
+We'll leave the blue term alone because this will combine with our other integral above, but for the red term:
+
+$-\displaystyle\int^{V^*}_V\frac{nR}{V}dV=-nRln(V)\displaystyle|^{V^*}_V=+nrln\left(\frac{V}{V^*}\right)$
+
+$P^*V^*=nRT$ so $V^*=\frac{nRT}{P^*}$ but we can define $P^*$ as 1 bar or Pa (doesn't matter as long as the temperature is high) so $V^*=nRT/$bar or Pa
+
+$S^{V,T}=n\bar{S}^*+\displaystyle\int^\infty_V\left[\frac{nR}{V}-\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV+nRln\left(\frac{V}{nRT}\right)$
+
+Now we can plug this equation for $S^{V,T}$ back into our equation for the Helmholtz (b/c that was why we were doing this all along, remember?)
+
+$A^{V,T}=U^{V,T}-TS^{V,T}=n\bar{U}^*+\displaystyle\int^\infty_V\left[P-\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV-nT\bar{S}^*-\displaystyle\int^\infty_V\left[\frac{nRT}{V}-\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV-nRTln\left(\frac{V}{nRT}\right)$
+
+Gather like terms: $A^{V,T}=n\left(\bar{U}^*-T\bar{S}^*\right)+\displaystyle\int^\infty_V\left[P-\frac{nRT}{V}\right]dV-nRTln\left(\frac{V}{nRT}\right)$
+
+Now we need to eventually end up with an expression for fugacity which is either the corrected pressure or the difference in the chemical potentials.
+
+Remember our plan was: $\color{blue}{U\rightarrow S\rightarrow A}\color{black}{\rightarrow\mu\rightarrow f}$and we've completed everything in blue.
+
+So onto the chemical potential: $\mu^{V,T}=?$
+
+Let's go back to our definition for the Helmholtz free energy: $A\equiv U-TS$
+
+So $dA=dU-TdS-SdT$
+
+We know that $dU=TdS-PdV+\displaystyle\sum_i\mu_{i,j}dn_i$ and that $\displaystyle\sum_i\mu_{i,j}dn_i$ is simply $\mu_idn_i$ for a pure substance so $dU=TdS-PdV+\mu_idn_i$
+
+If we substitute that into the derivative of the Helmholtz: $dA=\color{blue}{-S}\color{black}{dT}\color{red}{-P}\color{black}{dV+}\color{green}{\mu_i}\color{black}{dn_i}$
+
+$dA=\color{blue}{\left(\frac{\partial A}{\partial T}\right)_{n,V}}\color{black}{dT+}\color{red}{\left(\frac{\partial A}{\partial V}\right)_{n,T}}\color{black}{dV+}\color{green}{\left(\frac{\partial A}{\partial n_i}\right)_{V,T}}\color{black}{dn_i}$
+
+$\left(\frac{\partial A}{\partial n_i}\right)_{V,T}=\bar{U}^*-T\bar{S}^*+\displaystyle\int^\infty_V\left[\left(\frac{\partial P}{\partial n_i}\right)_{V,T}-\frac{RT}{V}\right]dV-\color{blue}{RTln\left(\frac{V}{nRT}\right)-nRT\frac{nRT}{V}\frac{V}{-n^2RT}}$ where the blue terms are from the product rule.
+
+The final term above cancels as follows: $\color{red}{-n}\color{black}{RT}\color{red}{\frac{nRT}{V}\frac{V}{-n^2RT}}\color{black}{=RT}$
+
+So:
+
+$$\mu_i^{V,T}=\left(\frac{\partial A}{\partial n_i}\right)_{V,T}=\bar{U}^*-T\bar{S}^*+\int^\infty_V\left[\left(\frac{\partial P}{\partial n_i}\right)_{V,T}-\frac{RT}{V}\right]dV-RTln\left(\frac{V}{nRT}\right)+RT$$
+
+If we remember that our reference state is defined as the pressure for which the ideal gas law holds we can pull in another energy function: enthalpy $H\equiv U+PV$
+
+$\bar{H}^*=\bar{U}^*-P\bar{V}^*=\bar{U}^*-RT$
+
+Next time we will correct our expression for $\mu_i$ for our $\bar{H}^*$ term.
+
+Answers to questions:
+
+1. What is the general form of the correction factor that we used to go from our $U^*$ to $U^{V,T}$?
 
 
-## october 24th 2018 (courtesy of Ellie)
+
+2. Why do we choose the reference state (T, P (ideal gas law)) that we do?
+
+
+
+3. How did we switch the limits of integration from $V^*$ to $V$ to $V$ to $\infty$?
+
+
+
+
+## October 24th 2018 (courtesy of Ellie)
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
