@@ -1259,7 +1259,234 @@ So: $\mu_{i,j}^{P,T}=\mu_{i,j}^{1,T}+\displaystyle\int_1^P\bar{V_j}dP$
 
 For molecular fluids $\bar{V_j}$ is a strong function of T and P with changes in the 10s to 100s of percent over temperature and pressures ranges of interest
 
+For pure substances:
 
+$$\bar{G_j}^{P,T}=\bar{H_j}^{1,298}-T\bar{S_j}^{1,298}+\int^T_{298}\bar{C_{P,j}}dT-T\int^T_{298}\frac{\bar{C_{P,j}}}{T}dT+\color{blue}{\int^P_1\bar{V_j}dP}$$
+
+The blue term is the only difference between pure solids and pure molecular fluids. The heat capacity function for fluids is the same as for solids, but fluids are a lot more compressible/expansive than solids.
+
+If the equation of state ($\bar{V}(P,T)$) is known then $\displaystyle\int^P_1\bar{V_j}dP$ can be evaluated.
+
+Consider a relatively straightforward equation of state: the ideal gas law
+
+$PV_j=n_jRT$ can be converted to $\bar{V_j}=\frac{RT}{P}$
+
+$\displaystyle\int^P_1\bar{V_j}dP=\displaystyle\int^P_1\frac{RT}{P}dP=RTln(P)-\color{red}{RTln(1)}$ where the red term is equal to 0 and can be eliminated.
+
+So for ideal gases we have: $\displaystyle\int^P_1\bar{V_j}dP=RTln(P)$ which is a nice and simple relationship between $\bar{V}$ and $P$.
+
+Is there a way we can define a quantity that will work for real substances but maintains the simplicity of this logarithmic correction?
+
+Define a new variable: fugacity $f_j^{P,T}$ such that the fundamental relationship among $\bar{V}$, $P$, and $T$ is conserved.
+
+$RTln(f_j^{P,T})=\displaystyle\int^P_1\bar{V_j}dP$ so for an ideal gas $f_j^{P,T}=P$
+
+An equation of state for pure fluids can solve $f_j^{P,T}$ and thus $\displaystyle\int^P_1\bar{V_j}dP$
+
+GN Lewis (1920s) defined fugacity as the difference in chemical potential of a phase component at 2 different states:
+
+$$\mu_i^{state 2}-\mu_i^{state 1}=RTln(f_i^{state 2})-RTln(f_i^{state 1})$$
+
+where:
+
+- states 1 and 2 must be at the same $T$ but may differ in $P$ and or composition
+- as $P$ goes to 0, $f_j^{P,T}$ approaches $P$
+
+For our case we will say that state 2 is $P,T$ and state 1 is $1,T$
+
+New notation: superscript $^\circ$ means a pure substance
+
+$(\mu^\circ_i)^{P,T}-(\mu^\circ_i)^{1,T}=RTln(f_i^\circ)^{P,T}-RTln(f_i^\circ)^{1,T}$
+
+Let's look at the low $P$ constraint: $RTln(f^\circ_i)^{1,T}\sim RTln(P)\sim RTln(1)=0$
+
+So $(\mu^\circ_i)^{P,T}-(\mu^\circ_i)^{1,T}=RTln(f_i^\circ)^{P,T}$
+
+Is there an equivalent for our original definition of fugacity?
+
+$(\mu_i^\circ)^{P,T}=(\mu^\circ_i)^{1,T}+\displaystyle\int^P_1\left(\frac{\partial \mu_i^\circ}{\partial P}\right)_TdP=(\mu^\circ_i)^{1,T}+\displaystyle\int^P_1\left(\frac{\partial\bar{G_i}}{\partial P}\right)_TdP=(\mu^\circ_i)^{1,T}+\displaystyle\int^P_1\bar{V_i}dP$
+
+So our definition of fugacity is: $(\mu_i^\circ)^{P,T}=(\mu^\circ_i)^{1,T}+\displaystyle\int^P_1\bar{V_i}dP$
+
+We can rearrange Lewis's definition: $(\mu_i^\circ)^{P,T}=(\mu^\circ_i)^{1,T}+RTln(f^\circ_i)^{P,T}$
+
+So we can now see that $\displaystyle\int^P_1\bar{V_i}dP=RTln(f^\circ_i)^{P,T}$
+
+How do we deal with this new thing we call fugacity? How can we evaluate it with experimental data?
+
+1. experimentally derived tables of fugacity coefficients
+
+show that $(f_i^\circ)^{P,T}=(\gamma^\circ_i)^{P,T}$
+
+We can think of this as a corrected pressure where the corrective term is dependent on $T$ and $P$
+
+This isn't a very function definition of fugacity as it only works at set $T$ and $P$ for certain fluids. But it is straight forward.
+
+
+2. equations of state
+
+2 options:
+
+a. $V=f(P,T)$ Volume explicit equation of state
+b. $P=g(V,T)$ Pressure explicit equation of state
+
+a is much less widely used, b is quite common for 3 reasons:
+
+1. experimental: way easier to control volume
+2. analytical: easier to measure changes in pressure than in volume
+3. statistical: the pressure explicit equation of state is a better fit to the experimental data
+
+We want to start looking at thermodynamics data as a function of volume and temperature so we need the Helmholtz free energy!
+
+## October 17th 2018 (courtesy of Spencer)
+How is $f_i^{P,T}$ evaluated?
+
+Pick a $P$ and $T$, calculate $\bar{V}$ from an equation of state and then calculate $f_i^{P,T}$ from a function of $\bar{V}$
+
+### Equations of state for molecular fluids:
+
+#### Virial Equation of state
+
+the definition of the compressibility factor is: $Z\equiv\frac{P\bar{V}}{RT}$
+
+$$Z(\bar{V})=\color{blue}{1}\color{black}{+}\color{red}{\frac{B}{\bar{V}}+\frac{C}{\bar{V}^2}+\frac{D}{\bar{V}^3}}$$
+
+Here the blue term is from the ideal gas law and the red terms are the corrections for non-ideality. $B$, $C$, and $D$ are 2nd, 3rd, and 4th virial coefficients. Each is taken as a species specific function of temperature, they are NOT constants.
+
+The virial equation of state can be made general by casting it in terms of reduced variables which are defined in terms of a property exhibited by all molecular fluids: the critical point.
+
+For this form we define: $P_{reduced}=\frac{P}{P_{critical}}$, $T_{reduced}=\frac{T}{T_{critical}}$, $\bar{V}_{reduced}=\frac{\bar{V}}{\bar{V}_{critical}}$, and finally $Z(\bar{V_r})=1+\frac{B_r}{\bar{V_r}}+\frac{C_r}{\bar{V_r}^2}+\frac{D_r}{\bar{V_r}^3}$. These work for all species as long as you know the critical state.
+
+#### Redlich-Kwong Equation of State
+Ideal gas law: $PV=nRT$
+
+With minor corrections we have the van der Waals equation: $P=\frac{RT}{\color{blue}{\bar{V}-b}}\color{black}{-}\color{red}{\frac{a}{\bar{V}^2}}$ where the blue term is a correction on the molar volume and the red term is a correction on the pressure.
+
+b is the excluded volume, the volume occupied by a molecule at high pressure
+
+a is the attraction correction
+
+Both of these coefficients are species specific.
+
+The (modified) Redlick-Kwong (RK or MRK) equation of state builds on the van der Waals equation: $P=\frac{RT}{\bar{V}-b}-\frac{a}{\sqrt{T\bar{V}(\bar{V}+b)}}$
+
+For the MRK, b is a species specific constant (doesn't change with temperature). a is a species specific function of temperature which assumes that the attractive forces among molecules change in magnitude with changes in temperature.
+
+There are three primary kinds of attraction to consider:
+
+1. electron dispersion: slight attraction due to the movement of electrons that is species specific but independent of temperature $a(T)=a_0-a_1(T)$
+2. attraction between polar molecules: for example, hydrogen bonding between water molecules. This is species specific and a function of temperature
+3. association via chemical reactions: for example $O+O\leftrightarrow O_2$, this is a species specific function of temperature.
+
+The Hollaway MRK equation of state: $a_0+a_1(T)=a+L+MT+NT^2$ where $L$, $M$, and $N$ are fit parameters to measure $P-V-T$ data.
+
+For inert, non-polar molecular fluids: $a_1(T)=0$ (ie noble gases, \ch{CH4}).
+
+We want to go from an equation of state to fugacity. Pressure is a function of volume and temperature, so we need to consider the thermodynamics in terms of volume and temperature.
+
+We will look at a progression: $U\rightarrow S \rightarrow F$ or $A$ (Helmholtz) $\rightarrow \mu \rightarrow f_i^{P,T}$ to end up with a functional form of fugacity in terms of volume and temperature.
+
+## October 19th 2018
+Last time we looked at geochemically useful equations of state.
+
+Some leading questions to consider:
+
+1. What are the two mains equations of state for volume in use for geothermodynamics?
+2. How are these two equations of state different? in theory? in practice?
+3. Why can one of the equations of state (the MRK) be thought of as a "corrected" ideal gas law?
+4. How can the correction terms for the MRK equation of state be physically rationalized?
+5. What is the primary difference between the equations of state for volumes of pure solids versus volumes of pure molecular fluids?
+
+Today we are going to start down the road of going from an equation of state to fugacity.
+
+For pure molecular fluids, equations of state often take the form of $P=f(V,T)$
+
+This requires an examination of thermodynamics in terms of volume and temperature as the independent variables.
+
+Now we will be considering the Helmholtz free energy rather than the Gibbs free energy.
+
+Our path: $U$ (internal energy) $\rightarrow S$ (entropy) $\rightarrow A$ (Helmholtz free energy) $\rightarrow\mu$ (chemical potential) $\rightarrow f_i^{P,T}$ (fugacity)
+
+Internal energy in a system defined by a constant amount of a pure substance of interest at a constant $n_i$
+
+$U^{V,T}=?$
+
+We will define a reference state which is denoted by $*$, then our $U(V,T)=U^*+$correction factor
+
+$U^*\equiv$ the internal energy at our temperature of interest, but at a pressure low enough such that the fluid obeys the ideal gas law
+
+$P^*V^*=nRT$
+
+$U^{V,T}=\color{blue}{U^*}+\color{red}{\displaystyle\int^V_{V^*}\left(\frac{\partial U}{\partial V}\right)_{T,n}dV}$ where $U^*=U^{P^*,T}$ and the red term is a correction factor
+
+We want to start with combining the first and third laws of thermodynamics
+
+$\color{blue}{dU}\color{black}{=T}\color{blue}{dS}\color{black}{-P}\color{blue}{dV}$
+
+The blue terms are all state functions.
+
+We can expand this to: $dU=T\color{blue}{\left[\left(\frac{\partial S}{\partial T}\right)_{n,V}dT+\left(\frac{\partial S}{\partial V}\right)_{n,T}dV\right]}\color{black}{-PdV}$ where the blue term is the expanded form of $dS$.
+
+If we collect like terms: $dU=T\color{blue}{\left(\frac{\partial S}{\partial T}\right)}\color{black}{_{n,V}dT+[T}\color{red}{\left(\frac{\partial S}{\partial V}\right)}\color{black}{_{n,T}-P]dV}$ where the blue term has some kind of an intuitive connection, but the red term lacks an intuitive link between the change in entropy and the change in volume.
+
+So we probably want a Maxwell relation: $\left(\frac{\partial S}{\partial V}\right)_{n,T}=\left(\frac{\partial P}{\partial T}\right)_{n,V}$
+
+Now we have: $dU=T\left(\frac{\partial S}{\partial T}\right)_{n,V}dT+\left[T\left(\frac{\partial P}{\partial T}\right)_{n,V}-P\right]dV$ which we can equate to $dU=\left(\frac{\partial U}{\partial T}\right)_{n,V}dT+\left(\frac{\partial U}{\partial V}\right)_{n,T}dV$
+
+So we get: $\left(\frac{\partial U}{\partial T}\right)_{n,V}dT=T\left(\frac{\partial S}{\partial T}\right)_{n,V}dT$ and $\left(\frac{\partial U}{\partial V}\right)_{n,T}dV=\left[T\left(\frac{\partial P}{\partial T}\right)_{n,V}-P\right]dV$
+
+This allows us to deal with our correction factor: $U^{V,T}=U^*+\displaystyle\int^V_{V^*}\left(\frac{\partial U}{\partial V}\right)_{n,T}dV$ in three steps:
+
+1. $U^*=n\bar{U}^*$
+2. flip the order of integration, instead of integrating from $V^*$ to $V$ go from $V$ to $V^*$, aka change the sign!
+3. substitute in our derived expression for $\left(\frac{\partial U}{\partial V}\right)_{n,T}$
+
+These steps will give us a more explicit definition
+
+$U^{V,T}=n\bar{U}^*-\displaystyle\int^{V^*}_V\left[T\left(\frac{\partial P}{\partial T}\right)_{n,V}-P\right]dV=n\bar{U}^*+\displaystyle\int^{V^*}_V\left[P-T\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV$
+
+$\displaystyle\int_V^\infty\left[P-T\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV=\displaystyle\int_V^{V^*}\left[P-T\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV+\displaystyle\int_{V^*}^\infty\left[P-T\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV$
+
+The simplest pressure explicit equation of state is the ideal gas law: $P=\frac{nRT}{V}$
+
+If $V>V^*$ then $P<P^*$ (if $n$ and $T$ remain constant)
+
+So if the ideal gas law holds: $\left(\frac{\partial P}{\partial T}\right)_{n,V}=\frac{nR}{V}=\frac{P}{T}$
+
+We know that the ideal gas law holds over the range: $V^*$ to infinity (based on how we defined our reference state) so $\displaystyle\int^\infty_{V^*}\left[P-T\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV=0$
+
+We can express our internal energy  as: $U^{V,T}=n\bar{U}^*+\displaystyle\int^{V^*}_V\left[P-T\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV=n\bar{U}^*+\displaystyle\int^\infty_V\left[P-T\left(\frac{\partial P}{\partial T}\right)_{n,V}\right]dV$
+
+Next we are going to think about how to go from $U^*$ to looking at how $U$ changes with $V$ and then $S$ with $V$, then $A$ with $V$ etc etc.
+
+Answers to our leading questions:
+
+1. What are the two mains equations of state for volume in use for geothermodynamics?
+
+Virial and modified Redlich-Kwong equations of state
+
+2. How are these two equations of state different? in theory? in practice?
+
+The Virial equation of state relies on a compressibility factor with 3 species specific functions of temperature which can be made general if the critical point is known. This can be done for each species provided you can known the properties of the species at its critical point.
+
+The MRK equation of state corrects the ideal gas law for molar volume (not temperature dependent) and pressure (temperature dependent) using a species specific constant for molar volume and a species specific function for pressure. This relies on fits to experimental data for each species.
+
+3. Why can one of the equations of state (the MRK) be thought of as a "corrected" ideal gas law?
+
+Because it is adding corrective factors dependent on species and temperature to the ideal gas law.
+
+4. How can the correction terms for the MRK equation of state be physically rationalized?
+
+The b term of the MRK is the amount of space that the molecules would take up if squished as small as possible. The a term is the amount to which attractive forces (like hydrogen bonding and electron dispersion) pull the molecules closer together depending on temperature.
+
+5. What is the primary difference between the equations of state for volumes of pure solids versus volumes of pure molecular fluids?
+
+Pure solids have volume explicit equations of state, pure molecular fluids have pressure explicit equations of state
+
+## October 22nd 2018
+
+
+## october 24th 2018 (courtesy of Ellie)
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
