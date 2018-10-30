@@ -1568,6 +1568,31 @@ Answers to questions:
 
 
 ## October 24th 2018 (courtesy of Ellie)
+Why are we worrying about volume and temperature as thermodynamic variables?
+
+$\mu^{V,T}=\left(\frac{\partial A}{\partial n_i}\right)_{V,T}=\left(\bar{U}^*-T\bar{S}^*\right)+\displaystyle\int^\infty_V\left[\left(\frac{\partial P}{\partial n_i}\right)_{V,T}-\frac{RT}{V}\right]dV-RTln\left(\frac{V}{nRT}\right)+RT$
+
+$H\equiv U+PV$
+
+$\bar{H}^*\equiv \bar{U}^*+P\bar{V}^*$
+
+Rearrange the ideal gas law: $P\bar{V}^*=RT$
+
+$\bar{H}^*=\bar{U}^*+RT$
+
+$\bar{U}^*=\bar{H}^*-RT$
+
+$\mu^{V,T}=\left(\bar{H}^*-T\bar{S}^*\right)+\displaystyle\int^\infty_V\left[\left(\frac{\partial P}{\partial n_i}\right)_{V,T}-\frac{RT}{V}\right]dV-RTln\left(\frac{V}{nRT}\right)$
+
+Finally fugacity:
+
+1. $\mu^{state 2}_i-\mu^{state 1}_i=RTln(f_i^{state 2})-RTln(f$
+
+
+## October 26th 2018
+This is all applied/relevant to the second problem set
+
+
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
