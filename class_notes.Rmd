@@ -1368,7 +1368,7 @@ a is the attraction correction
 
 Both of these coefficients are species specific.
 
-The (modified) Redlick-Kwong (RK or MRK) equation of state builds on the van der Waals equation: $P=\frac{RT}{\bar{V}-b}-\frac{a}{\sqrt{T\bar{V}(\bar{V}+b)}}$
+The (modified) Redlick-Kwong (RK or MRK) equation of state builds on the van der Waals equation: $P=\frac{RT}{\bar{V}-b}-\frac{a}{\sqrt{T}\bar{V}(\bar{V}+b)}$
 
 For the MRK, b is a species specific constant (doesn't change with temperature). a is a species specific function of temperature which assumes that the attractive forces among molecules change in magnitude with changes in temperature.
 
@@ -1588,11 +1588,58 @@ Finally fugacity:
 
 1. $\mu^{state 2}_i-\mu^{state 1}_i=RTln(f_i^{state 2})-RTln(f$
 
+2. as $P\rightarrow 0$, $f_i\rightarrow 0$
+
+State 2 is defined as: $P$, $V$, $T$
+
+State 1 is defined as: $P^*=1$, $V^*$, $T$
+
+$\mu_i^{V,T}-\mu_i^*=RTln(f_i^{V,T})$
+
+$\bar{H}^*-T\bar{S}^*=\bar{G}^*=\bar{\mu}^*$ (the end of this comes from our previous derivation of the 3rd condition of heterogeneous equilibrium)
+
+$\mu_i^{V,T}-\bar{G}^*=\mu_i^{V,T}-\mu_i^*=RTln(f_i^{V,T})=\displaystyle\int^\infty_V\left[\left(\frac{\partial P}{\partial n_i}\right)_{V,T}-\frac{RT}{V}\right]dV-RTln\left(\frac{V}{nRT}\right)$
+
+Flow chart: Choose $P$ and $T$ $\rightarrow$ calculate $V$ from pressure explicit equation of state (iteratively) $\rightarrow$ calculate $f^{V,T}$ from the function of $V$
+
+So choose an equation of state:
+
+1. ideal gas law
+
+$PV=nRT$ $\rightarrow$ $P=\frac{nRT}{V}$
+
+$RTln(f_i^{V,T})=\displaystyle\int^\infty_V\color{red}{\left[\frac{RT}{V}-\frac{RT}{V}\right]}\color{black}{dV-RTln\left(\frac{V}{nRT}\right)$ where the red term goes to zero so: $RTln(f_i^{V,T})=RTln\left(\frac{nRT}{V}\right)=RTln(P)$
+
+2. Redlich-Kwong equation of state
+
+$P=\frac{RT}{\bar{V}-b}-\frac{a}{\sqrt{T}\bar{V}(\bar{V}+b)}=\frac{nRT}{V-bn}-\frac{an^2}{\sqrt{T}V(V+bn)}$
+
+$\left(\frac{\partial P}{\partial n}\right)_{V,T}=\frac{RT}{V-bn}+\frac{nbRT}{(V-bn)^2}-\frac{2an}{\sqrt{T}V(V+bn)}+\frac{abn^2}{\sqrt{T}V(V+bn)^2}$
+
+$ln(f_i^{V,T})=$ lots of tedeous integration $=ln\left(\frac{\bar{V}}{\bar{V}-b}\right)+\frac{b}{\bar{V}-b}-\frac{a}{RT^{3/2}(\bar{V}+b)}+\frac{a}{RT^{3/2}b}ln\left(\frac{\bar{V}}{\bar{V}+b}\right)-ln\left(\frac{\bar{V}}{RT}\right)$
+
+$\displaystyle\sum_i\nu_i\mu_{i,j}=0$
+
+for a pure substance: $\displaystyle\sum_j\nu_j\mu_j=0$
+
+$\displaystyle\sum_j\nu_j\bar{G_j}^\circ=0=\Delta(\bar{G}^\circ)^{P_0,T_0}$
+
+$\Delta(\bar{G}^\circ)^{P_{eq},T_{eq}}=\Delta(\bar{H}^\circ)^{1,298}-T_{eq}\Delta(\bar{S}^\circ)^{1,298}+\displaystyle\int^{T_{eq}}_{298}\Delta\bar{C_P}^\circ dT-T_{eq}\displaystyle\int^{T_{eq}}_{298}\frac{\Delta\bar{C_P}^\circ}{T}dT+\displaystyle\int^{P_{eq}}_1\Delta\bar{V}^\circ dP$
+
+For most pure substances: $\Delta(\bar{H}^\circ)^{1,298}+\displaystyle\int^{T_{eq}}_{298}\Delta\bar{C_P}^\circ dT\approx\Delta(\bar{H}^\circ)^{1,T}=$ constant
+
+$T_{eq}\Delta(\bar{S}^\circ)^{1,298}+T_{eq}\displaystyle\int^{T_{eq}}_{298}\frac{\Delta\bar{C_P}^\circ}{T}dT\approx T_{eq}\Delta(\bar{S}^\circ)^{1,T}=$ constant
+
+$\displaystyle\int^{P_{eq}}_1\Delta\bar{V}^\circ dP=\Delta\bar{V_s}^\circ P+RTln(f_i^{P,T})$
 
 ## October 26th 2018
 This is all applied/relevant to the second problem set
 
 
+
+## October 31st 2018
+
+## November 2nd 2018
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
