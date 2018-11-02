@@ -1635,7 +1635,42 @@ $\displaystyle\int^{P_{eq}}_1\Delta\bar{V}^\circ dP=\Delta\bar{V_s}^\circ P+RTln
 ## October 26th 2018
 This is all applied/relevant to the second problem set
 
+### Question 3
+$\displaystyle\sum_i\mu_i\nu_i=0=\Delta\bar{G}^\circ(P,T)=\Delta(\bar{H}^\circ)^{1,298}-T_{eq}\Delta(\bar{S}^\circ)^{1,298}+\displaystyle\int^{T_{eq}}_{298}\Delta\bar{C_P}^\circ dT-T_{eq}\displaystyle\int^{T_{eq}}_{298}\frac{\Delta\bar{C_P}^\circ}{T}dT+\color{blue}{\displaystyle\int^{P_{eq}}_1\Delta\bar{V}^\circ dP}$
 
+We can expand the volume term (blue) into $+\displaystyle\int^{P_{eq}}_1\Delta\bar{V_s}^\circ dP+\displaystyle\int^{P_{eq}}_1\nu_f\bar{V_f}dP$
+
+From the last problem set: the slope doesn't change with $P$ or $T$ so:
+
+$\Delta(\bar{H}^\circ)^{1,298}+\displaystyle\int^{T_{eq}}_{298}\Delta\bar{C_P}^\circ dT\approx\Delta(\bar{H}^\circ)^{1,T}$
+
+$\Delta(\bar{S}^\circ)^{1,298}+\displaystyle\int^{T_{eq}}_{298}\frac{\Delta\bar{C_P}^\circ}{T}dT\approx \Delta(\bar{S}^\circ)^{1,T}$
+
+$\frac{dP}{dT}=\frac{\Delta\bar{S}}{\Delta\bar{V}}$
+
+$\Delta(\bar{G}^\circ)^{P,T}=\color{blue}{\Delta(\bar{H}^\circ)^{1,T}}\color{black}{-T}\color{blue}{\Delta(\bar{S}^\circ)^{1,T}+\Delta\bar{V_s}^\circ}\color{black}{(P-P_r)+\displaystyle\int^{P_{eq}}_1\nu_f\bar{V_f}^\circ dP}$
+
+So our only complication is fugacity. For an ideal gas: $(f_i^\circ)^{P,T}=P$ so $\displaystyle\int^P_1\bar{V_f}^\circ dP=\nu_fRTln(f_f^\circ)^{P,T}$
+
+If we didn't have a fluid: $\Delta(\bar{G}^\circ)^{P,T}=\color{blue}{\Delta(\bar{H}^\circ)^{1,T}}\color{red}{-T\Delta(\bar{S}^\circ)^{1,T}}\color{green}{+\Delta\bar{V_s}^\circ(P-P_r)}$
+
+Where we have a function of the form: $g(P,T)=\color{blue}{a}\color{black}{+}\color{red}{b}\color{black}{T+}\color{green}{c}\color{black}{P}=0$ and thus $P=\frac{-a-bT}{c}$
+
+Using a table of fugacities how can we do this?
+
+$\Delta(\bar{H}^\circ)^{1,T}-T\Delta(\bar{S}^\circ)^{1,T}+\Delta\bar{V_s}^\circ(P-P_r)+\displaystyle\int^{P_{eq}}_1\nu_f\bar{V_f}^\circ dP=0$
+
+for starters: $\nu_f=1$ so we can ignore that
+
+1. pick a $T$ to start
+2. pick a $P$ which sets $(f_i^\circ)^{P,T}$
+3. evaluate $\Delta(\bar{G}^\circ)^{P,T}$
+4. Is $\Delta(\bar{G}^\circ)^{P,T}>0 \rightarrow$ choose a lower pressure, if $\Delta(\bar{G}^\circ)^{P,T}<0\rightarrow$ choose a higher pressure
+5. iterate
+
+You aren't going to find conditions where $\Delta(\bar{G}^\circ)^{P,T}=0$, but you will find one P,f pair that gives a slightly positive $\Delta(\bar{G}^\circ)^{P,T}$ and an adjacent P,f pair that gives a slightly negative $\Delta(\bar{G}^\circ)^{P,T}$ and the correct P is somewhere in between.
+
+Use crustally relevant T, P conditions
 
 ## October 31st 2018
 
