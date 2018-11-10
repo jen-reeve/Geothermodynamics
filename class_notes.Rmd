@@ -1673,8 +1673,364 @@ You aren't going to find conditions where $\Delta(\bar{G}^\circ)^{P,T}=0$, but y
 Use crustally relevant T, P conditions
 
 ## October 31st 2018
+We spent a lot of time developing the third condition of heterogeneous equilibrium.
+
+We went from $\displaystyle\sum_i\mu_{i,j}\nu_i=0$ to $\displaystyle\sum_j\nu_j\mu_j=0$ for pure substances.
+
+We then took $\displaystyle\sum_j\nu_j\mu_j=0$ to $\displaystyle\sum_j\nu_j\bar{G_j}^\circ=0$ using the equivalence of $\bar{G_j}=\mu_j$ for pure substances
+
+We refined $\displaystyle\sum_j\nu_j\bar{G_j}^\circ=0$ as $\Delta(\bar{G_j}^\circ)^{P,T}$
+
+We then determined that $\Delta(\bar{G_j}^\circ)^{P,T}$ could be evaluated as $\Delta(\bar{H}^\circ)^{P_{ref},T_{ref}}-T\Delta(\bar{S}^\circ)^{P_{ref},T_{ref}}+\displaystyle\int^T_{T_{ref}}\Delta\bar{C_P}^\circ dT-T\displaystyle\int^T_{T_{ref}}\frac{\bar{C_P}^\circ}{T}dT+\displaystyle\int^P_{P_{ref}}\Delta\bar{V}^\circ dP$ for solid
+
+We were able to take this complicated equation and simplify most of it and expand the volume term to work with fluids too: $0=\Delta(\bar{H}^\circ)^{P_{ref},T}-T\Delta(\bar{S}^\circ)^{P_{ref},T}-(P-P_{ref})\Delta\bar{V_s}^\circ+RTlnf_k^{P,T}$
+
+Now we just need to figure out how to deal with that last term, there are two ways:
+
+1. The general way (always possible if you have a pressure explicit equation of state): calculate $\bar{V}$ from the equation of state and then calculate the $f$ of the fluid phase from that $\bar{V}$ and $T$
+2. The simple way (only available for set $P-V-T$ and only for some pure substances): get $f^{P,T}$ from tables of experimental $P-V-T$ data
+
+Now let's look at solutions which are essentially mixtures, the types \textbf{we will consider} or which may be \textit{relevant to geology}:
+
+1. \textbf{molecular fluids}: $H_2O_{fluid}$, $CO_{2,fluid}$
+2. \textit{silicate melts}: $FeO_{melt}$, $MgO_{melt}$, $SiO_{2,melt}$
+3. \textbf{aqueous electrolytes}: $CO_{2,aq}$, $CO^{2-}_{3,aq}$, $HCO^-_{3,aq}$
+4. \textbf{solid solutions}: $KAlSi_3O_8$ $K_{-1}Na$
+5. \textbf{gas mixtures}: $H_2O_{gas}$, $CO_{2,gas}$, $H_2S_{gas}$, $SO_{2,gas}$
+
+Thought experiment: Consider an ideal gas mixture
+
+We have a system at constant temperature and pressure (low enough that the ideal gas law holds) that is initially (state 1) divided into two volumes each of which is composed of a pure ideal gas. We want to consider the effects of the mechanical mixing that occurs when we remove the barrier between the volumes (state 2).
+
+Now we can consider the effects on several different properties of the system:
+
+1. Volume effect:
+
+$V^{state1}=V^{state2}$ so $V_{a+b}=V_a+V_b$
+
+$V_{a+b}-(V_a+V_b)=\Delta V_{soln}=0$
+
+2. Heat effect:
+
+$Q^{state1}=Q^{state2}$ so $\Delta Q_{soln}=0$
+
+These two effects are also the definition of an ideal solution: $\Delta V_{soln}=0$ and $\Delta Q_{soln}=0$. Essentially ideal mixtures will behave as mechanical mixtures, the whole is equal to the sum of the parts.
+
+3. Enthalpy effect:
+
+$dQ=\frac{dQ}{dT}dT=C_PdT=dH$ A finite change in heat content equaling a finite change in enthalpy for our system
+
+$\Delta Q_{soln}=\Delta H_{soln}=0$
+
+This is a consequence of the assumption that we are dealing with an ideal gas which does not interact.
+
+4. Entropy effect:
+
+$S^{state2}-S^{state1}=\Delta S_{soln}=\Delta S_a+\Delta S_b$
+
+$\Delta S_a=\displaystyle\int^{state2}_{state1}\left(\frac{\partial S}{\partial V}\right)_TdV=\displaystyle\int^{V_a+V_b}_{V_a}\left(\frac{\partial S}{\partial V}\right)_TdV$
+
+Now we use a Maxwell relationship: $\left(\frac{\partial S}{\partial V}\right)_T=\left(\frac{\partial P}{\partial T}\right)_V$
+
+And we take advantage of the fact that we are working with an ideal gas: $\left(\frac{\partial P}{\partial T}\right)_V=\frac{nR}{V}$
+
+So now we have: $\Delta S_a=\displaystyle\int^{V_{a+b}}_{V_a}\frac{n_aR}{V}dV=n_aRln(\frac{V_a+V_b}{V_a})=-n_aRln(\frac{V_a}{V_a+V_b})$ (we switch the sign by flipping the inside of the logarithm because this changes the limits from 1 to infinity to 0 to 1)
+
+$PV=nRT$ so $\bar{V_i}=\frac{V}{n}=\frac{RT}{P}$ which is a constant!
+
+$V_a=n_a\bar{V_a}$ and $V_b=n_b\bar{V_b}$ so! $\bar{V_a}=\bar{V_b}$ for an ideal gas
+
+$\Delta S_a=-n_aRln(\frac{n_a\bar{V_a}}{n_a\bar{V_a}+n_b\bar{V_b}})=-n_aRln(\frac{n_a}{n_a+n_b})=-n_aRlnX_a$
+
+$V_a=n_a\bar{V_a}$ and 
+
 
 ## November 2nd 2018
+Continuing the thermodynamics of solutions and mixing
+
+but one step back to look at Question 2 from Problem Set 2:
+
+$P=\frac{RT}{\bar{V}-b}-\frac{a}{\sqrt{T}\bar{V}(\bar{V}+b)}$
+
+Pressure and temperature are given
+
+$P-\frac{RT}{\bar{V}-b}-\frac{a}{\sqrt{T}\bar{V}(\bar{V}+b)}=0$
+
+$g(\bar{V})=P-\frac{RT}{\bar{V}-b}-\frac{a}{\sqrt{T}\bar{V}(\bar{V}+b)}$
+
+Now we find the $\bar{V}$ such that this function is equal to zero
+
+1. choose $P$ and $T$
+2. make a list of potential $\bar{V}$ (cm\textsuperscript{3}) values (0:guesstimate from question 1, go by tens)
+3. evaluate function of $\bar{V}$ at each $\bar{V}$ in list
+4. iterate 2 and 3
+
+or choose an equation solver (which generally use Newton-Raphson)
+
+Back to our thought experiment:
+
+1. $\Delta V_{soln}=0$
+2. $\Delta H_{soln}=0$
+3. Entropy effect
+
+We are looking at the entropy effect:
+
+$S_{a+b}-(S_a+S_b)=\Delta S_{soln}$
+
+$\Delta S_{soln}=\Delta S_a +\Delta S_b$
+
+$\Delta S_a=-n_aRln(X_a)$
+
+$\Delta S_{soln}=\Delta S_a+\Delta S_b=-n_aRln(X_a)-n_bRln(X_b)$
+
+$\Delta\bar{S}_{soln}=\frac{-n_a}{n_a+n_b}Rln(X_a)-\frac{n_b}{n_a+n_b}Rln(X_b)=-X_aRln(X_a)-X_bRln(X_b)$
+
+We could do this for $m$ ideal gases consisting of unreactive molecules: $\Delta\bar{S}_{soln}=-R\displaystyle\sum^m_iX_iln(X_i)$ where $0\leq X_i\leq 1$
+
+For one gas $\Delta\bar{S}_{soln}=0$
+
+For any other number of gases $ln(X_i)$ is negative so $\Delta\bar{S}_{soln}$ increases!
+
+Entropy always increases on mixing.
+
+The transition from the "ordered" state (state 1) to the "disordered" state (state 2) leads to $\Delta\bar{S}_{soln}>0$
+
+Generally spontaneous processes create more entropy
+
+4. Gibbs free energy effect
+
+$G^{state2}-G^{state1}=\Delta G_{soln}$
+
+$G\equiv H-TS$
+
+$\Delta G_{soln}=\Delta H_{soln}-T\Delta S_{soln}$ but we know that $\Delta H_{soln}=0$ so $\Delta G_{soln}=T\Delta S_{soln}$
+
+$\Delta\bar{G}_{soln}=-T\Delta\bar{S}_{soln}$ so $\Delta\bar{G}_{soln}<0$ for spontaneous processes
+
+$\Delta\bar{G}_{soln}=RT\displaystyle\sum^m_iX_iln(X_i)$ for $0\leq X_i\leq 1$
+
+## November 5 2018
+Questions to consider:
+
+1. What is an ideal solution?
+2. What are the thermodynamic effects of mechanical mixing?
+3. HOw does entropy change upon dissolution in an ideal gas solution? Why is this sometimes called "configurational entropy"?
+4. How does the Gibbs free energy change with dissolution in an ideal gas mixture? Can you derive a necessary (but not sufficient) condition for a spontaneous process from this?
+
+Our system: two separate volumes of pure ideal non-reactive gases which are allowed to mix at a constant $T$ and $P$ (a $P$ such that the ideal gas law holds)
+
+1. $\Delta\bar{V}_{soln}=0$
+2. $\Delta\bar{H}_{soln}=0$
+3. $\Delta\bar{S}_{soln}=-R\displaystyle\sum^m_{i=1}X_ilnX_i$
+4. $\Delta\bar{G}_{soln}=$?
+
+$\Delta G_{soln}=-T\Delta S_{soln}$ or $\Delta\bar{G}_{soln}=-T\Delta\bar{S}_{soln}$
+
+$\Delta\bar{G}_{soln}=RTX_alnX_a+RTX_blnX_b$
+
+for $m$ types of gases: $\Delta\bar{G}_{soln}=RT\displaystyle\sum^m_{i=1}X_ilnX_i$
+
+$\Delta\bar{G}_{soln}<0$
+
+Solution processes lower the Gibbs free energy
+
+$\displaystyle\sum_i\nu_i\mu_{i,j}=0$ ???
+
+We need to look at 2 more quantities to really address this:
+
+5. $\bar{G}_{soln}^{P,T}=$?
+6. $\mu_{i,igs}^{P,T}$ (where $igs$ stands for the ideal gas solution phase)
+
+5. $\bar{G}_{soln}^{P,T}=$?
+
+$\bar{G}^{state2}-\bar{G}^{state1}=\Delta\bar{G}_{soln}$
+
+$\bar{G}^{state2}=\bar{G}_{soln}=\bar{G}^{state1}+\Delta\bar{G}_{soln}$
+
+$G^{state1}=n_a(\bar{G}_a^\circ)^{P,T}+n_b(\bar{G}_b^\circ)^{P,T}$ (mechanical mixing)
+
+$\bar{G}^{state1}=\frac{G^{state1}}{n_a+n_b}=\frac{n_a(\bar{G}^\circ_a)^{P,T}}{n_a+n_b}+\frac{n_b(\bar{G}^\circ_b)^{P,T}}{n_a+n_b}=X_a(\bar{G}^\circ_a)^{P,T}+X_b(\bar{G}^\circ_b)^{P,T}$
+
+$\bar{G}_{soln}^{P,T}=\bar{G}^{state1}+\Delta\bar{G}_{soln}=X_a[(\bar{G}^\circ_a)^{P,T}+RTlnX_a]+X_b[(\bar{G}^\circ_b)^{P,T}+RTlnX_b]$
+
+$(\bar{G}^\circ_b)^{P,T}=(\bar{H}^\circ_b)^{1,298}-T(\bar{S}^\circ_b)^{P,T}+\displaystyle\int^T_{298}\bar{C_P}^\circ_b dT-T\displaystyle\int^T_{298}\frac{\bar{C_P}^\circ_b}{T}dT+\displaystyle\int^P_1\bar{V_b}^\circ dP$
+
+6. $\mu_{i,igs}=$?
+
+Refresher from mid-September:
+
+$U_j=TS_j-PV_j+\displaystyle\sum_i\mu_{i,j}n_i$
+
+$G_j=U_j-TS_j+PV_j=\displaystyle\sum_i\mu_{i,j}n_i$
+
+$\bar{G_j}=\frac{G_j}{\sum_in_i}=\displaystyle\sum_i\mu_{i,j}X_i$
+
+$\bar{G}_{soln}^{P,T}=X_a\mu_{a,igs}^{P,T}+X_b\mu_{b,igs}^{P,T}=X_a[(\bar{G}^\circ_a)^{P,T}+RTlnX_a]+X_b[(\bar{G}^\circ_b)^{P,T}+RTlnX_b]$
+
+$\mu_{a,igs}^{P,T}=(\bar{G}^\circ_a)^{P,T}+RTlnX_a$ and $\mu_{b,igs}^{P,T}=(\bar{G}^\circ_b)^{P,T}+RTlnX_b$
+
+$\mu_{i,igs}^{P,T}=(\bar{G}^\circ_i)^{P,T}+RTlnX_i$
+
+Now we can evaluate the third condition of heterogeneous equilibrium for an ideal gas solution
+
+Let's test: what if we mix gas $a$ with gas $a$?
+
+$\bar{G}_{soln}=X_a[(\bar{G}^\circ_a)^{P,T}+RTlnX_a]+X_b[(\bar{G}^\circ_b)^{P,T}+RTlnX_b]$ where $X_a=1$ so $lnX_a=0$ and $X_b=0$ so $\bar{G}_{soln}=(\bar{G}^\circ_a)^{P,T}$ which is what we would expect!
+
+When is this actually applicable?
+
+Fumarole gases:
+
+$4H_2+CO_2\leftrightarrow CH_4+2H_2O$
+
+We want to know how the proportions of the gases vary.
+
+We have 1 phase and 4 components
+
+$\nu_{H_2}=-4$, $\nu_{CO_2}=-1$, $\nu_{CH_4}=1$ and $\nu_{H_2O}=2$
+
+$\mu_{H_2,igs}^{P,T}=(\bar{G}^\circ_{H_2})^{P,T}+RTlnX_{H_2}$
+
+$\displaystyle\sum_i\nu_i\mu_{i,j}=0$ at equilibrium
+
+This isn't only a stepping stone, it is useful in its own right (volcanic gases, exoplanet atmospheres)
+
+Up next: crystals!
+
+## November 7 2018
+Leading questions:
+
+1. What is an "ideal" solution?
+2. Where does the logarithmic "correction term" come from?
+
+Takeaway for ideal gas solutions (igs):
+
+$\mu_{i,igs}^{P,T}=(\bar{G}^\circ_i)^{P,T}+RTlnX_{i,igs}$ where $(\bar{G}^\circ_i)^{P,T}=(\mu_i^\circ)^{P,T}$
+
+$\mu_{i,igs}^{P,T}$ is the component in solution and $(\mu_i^\circ)^{P,T}$ is the component as a pure substance
+
+Now: ideal crystalline solutions (ixs):
+
+Different set of vocabulary and nomenclature
+
+Examples:
+
+1. enstatite (ens): (Mg,Fe)\ch{SiO3} aka \ch{XSiO3}. There is one mole of Fe+Mg per mole of ens
+2. olivine aka forsterite (fors): (Ca,Mg,Fe,Mn)$_2$\ch{SiO4} aka \ch{X2SiO4}. There are two moles of Ca+Mg+Fe+Mn per mole of fors
+
+Mixing on site
+
+All variability at one crystallographic site
+
+$\alpha$ is the atoms on the mixing site of interest per formula unit (molar quantity)
+
+$\alpha_{ens}=1$ $\alpha_{fors}=2$
+
+Accounting is slightly complicated for ixs
+
+Parameters for ixs:
+
+1. $\Delta\bar{V}_{soln}=0$
+2. $\Delta\bar{H}_{soln}=0$
+
+These are (again) the definition of an ideal solution (a useful fiction). Atoms mixing on a given crystallographic site are similarly sized/charged
+
+We need to deal with the configurational entropy. In igs this was due to opening the entire space to all atoms, in ixs this is at the crystal site.
+
+$\mathcal{X}_{i`}$ is the atom fraction. Where $i`$ indicates that we are looking at the atom of interest not the phase component
+
+$\mathcal{X}_{Mg,ens}=\frac{Mg}{Mg+Fe}$ and $\mathcal{X}_{Ca,fors}=\frac{Ca}{Ca+Mg+Fe+Mn}$
+
+3. $\Delta\bar{S}_{soln}=-\alpha R\displaystyle\sum^{m}_{i`=1}\mathcal{X}_{i`}ln\mathcal{X}_{i`}$
+4. $\Delta\bar{G}_{soln}=-T\Delta\bar{S}_{soln}=\alpha RT\displaystyle\sum^m_{i`=1}\mathcal{X}_{i`}ln\mathcal{X}_{i`}$
+5. $\bar{G}_{soln}^{P,T}=\displaystyle\sum^m_{i`=1}\mathcal{X}_{i`}[(\bar{G}^\circ_i)^{P,T}+\alpha RTln\mathcal{X}_{i`}]$
+
+$(\bar{G}^\circ_{i})^{P,T}$ refers to a pure substance with only atoms of type $i`$ on the mixing site of interest
+
+Example: olivine
+
+i: \ch{Mg2SiO4} (fayallite) $\rightarrow$ $i`$ is Mg
+
+i: \ch{Fe2SiO4} (forsterite) $\rightarrow$ $i`$ is Fe
+
+6. $\mu_{i,ixs}^{P,T}=(\bar{G}^\circ_i)^{P,T}+\alpha RTln\mathcal{X}_{i`}$ (as usual something we know and a logarithmic correction term)
+
+We can also do ideal crystalline solutions with more than one type of mixing site. Example: garnet
+
+(Ca,Mn,Mg,Fe$^{2+}$)$_3$(Al,Fe$^{3+}$,Cr$^{3+}$)$_2$Si$_3$O$_{12}$ aka \ch{X3Y2Si3O12}
+
+$\alpha_X=3$ and $\alpha_Y=2$
+
+$\alpha_k$ is the number of times mixing site $k$ appears in the expression of a formula unit
+
+$m_k$ is the number of different ions mixing on site $k$
+
+$\Delta\bar{S}_{soln}=-\alpha_XR\displaystyle\sum^{m_X}_{i`=1}\mathcal{X}_{i`}ln\mathcal{X}_{i`}-\alpha_YR\displaystyle\sum^{m_Y}_{i`=1}\mathcal{X}_{i`}ln\mathcal{X}_{i`}$
+
+$\alpha_X=3$, $m_X=4$, $\alpha_Y=2$ and $m_Y=3$
+
+$\mu_{i,ixs}^{P,T}=(\bar{G}^\circ_i)^{P,T}+\displaystyle\sum_k\alpha_k\displaystyle\sum_{i`=1}^{m_k}RTln\mathcal{X}_{i`}$
+
+i: \ch{Fe3Al2Si3O12} (almandine) $i`_X$ is Fe$^{2+}$ and $i`_Y$ is Al
+
+$\mu_{almandine,garnet}^{P,T}=(\bar{G}_{almandine}^\circ)^{P,T}+3RTln\mathcal{X}_{Fe,X}+2RTln\mathcal{X}_{Al,Y}$
+
+Isotopic mixing is well represented by ixs mixing.
+
+But in a real solution (ex/ sulfuric acid in water) two key things change: $\Delta\bar{H}_{soln}\neq0$ and $\Delta\bar{V}_{soln}\neq0$
+
+This forces us to work with our final thermodynamic variable: activity (corrected composition)
+
+## November 9 2018
+Leading questions:
+
+1. What is the difference between $X_i$ (mole fraction) and $\mathcal{X}_i$ (atom fraction)?
+2. When are the $X_i$ and $\mathcal{X}_i$ equal?
+3. Why can't all solutions be represented as ideal mixtures?
+
+Continuing our exploration of solution processes but moving away from ideal mixtures.
+
+For non ideal mixtures: $\Delta\bar{H}_{soln}\neq0$ and $\Delta\bar{V}_{soln}\neq0$
+
+We can assert that when we have $\mu_{i,soln}$ we can break it up into $\mu_{i,soln}^{P,T}=(\mu_i^\circ)^{P,T}+RTlna_i^{P,T}$
+
+Here $a_i^{P,T}$ is the activity. This has the flavor of mol/atom fraction
+
+Activity is both the most straightforward and most opaque thermodynamic variable
+
+Let's start with the opaque definition:
+
+Lewis's definition of fugacity: $\mu_i^{state2}-\mu_i^{state2}=RTlnf_i^{state2}-RTlnf_i^{state1}$
+
+$\mu_{i,soln}^{P,T}-(\mu_i^\circ)^{1,T}=RTlnf_{i,soln}^{P,T}-RTln(f_i^\circ)^{1,T}$
+
+As $P\rightarrow 0$, $f\rightarrow P$ so $(f_i^\circ)^{1,T}\rightarrow 1$ and $RTln(f_i^\circ)^{1,T}\rightarrow 0$
+
+$(\mu_i^\circ)^{P,T}-(\mu_i^\circ)^{1,T}=RTln(f_i^\circ)^{P,T}$
+
+$\mu_{i,soln}^{P,T}-(\mu_i^\circ)^{P,T}=RTlnf_{i,soln}^{P,T}-RTln(f_i^\circ)^{P,T}=RTln\frac{f_{i,soln}^{P,T}}{(f_i^\circ)^{P,T}}$
+
+$a_{i,soln}^{P,T}=\left(\frac{f_{i,soln}}{f_i^\circ}\right)^{P,T}$
+
+For an ideal gas solution $\mu_{i,igs}^{P,T}=(\mu_i^\circ)^{P,T}+RTlnX_i$ so $a_{i,igs}^{P,T}=X_i$
+
+For an ideal crystalline solution $\mu_{i,ixs}^{P,T}=(\mu_i^\circ)^{P,T}+RTln\mathcal{X}_{i`}$ (for one type of mixing site, $\alpha=1$) so $a_{i,ixs}^{P,T}=\mathcal{X}_{i,ixs}=X_i$
+
+Activity is both species and phase specific.
+
+Behavior of non-ideal solutions (here you can replace the vapor pressure axis with activity):
+
+![Nonideal Activities](nonideal_activity.jpg)
+
+Positive deviations from ideality reflect clustering of molecules of type 1 with molecules of type 1 (or vice versa for type 2). Essentially like prefers like. Examples include \ch{CO2}-\ch{H2O} mixtures, \ch{CH4}-\ch{H2O} mixtures and \ch{KAlSi3O8}-\ch{NaAlSi3O8} mixtures
+
+Negative deviations from ideality are much less common and reflect perfect distribution of molecules, ordering that is well-defined, essentially checkerboarding. Here like prefers unlike. The only real example in geology is dolomite and calcite.
+
+If we consider these scenarios in the context of $\mu_{i,soln}^{P,T}=(\mu_i^\circ)^{P,T}+RTlna_{i,soln}^{P,T}$
+
+For positive deviations $a_{i,soln}^{P,T}>X_i$ so $RTlna_{i,soln}^{P,T}<RTlnX_i$
+
+For negative deviations $a_{i,soln}^{P,T}<X_i$ so $RTlna_{i,soln}^{P,T}>RTlnX_i$
 
 # Definitions
 Component: chemical formula used to describe the composition of a phase
