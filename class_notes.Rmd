@@ -14,6 +14,7 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(latex2exp)
+library(knitr)
 knitr::opts_knit$set(latex.options.xcolor="dvipsnames")
 ```
 
@@ -1608,7 +1609,7 @@ So choose an equation of state:
 
 $PV=nRT$ $\rightarrow$ $P=\frac{nRT}{V}$
 
-$RTln(f_i^{V,T})=\displaystyle\int^\infty_V\color{red}{\left[\frac{RT}{V}-\frac{RT}{V}\right]}\color{black}{dV-RTln\left(\frac{V}{nRT}\right)$ where the red term goes to zero so: $RTln(f_i^{V,T})=RTln\left(\frac{nRT}{V}\right)=RTln(P)$
+$RTln(f_i^{V,T})=\displaystyle\int^\infty_V\color{red}{\left[\frac{RT}{V}-\frac{RT}{V}\right]}\color{black}{dV-RTln\left(\frac{V}{nRT}\right)}$ where the red term goes to zero so: $RTln(f_i^{V,T})=RTln\left(\frac{nRT}{V}\right)=RTln(P)$
 
 2. Redlich-Kwong equation of state
 
@@ -2020,8 +2021,9 @@ Activity is both species and phase specific.
 
 Behavior of non-ideal solutions (here you can replace the vapor pressure axis with activity):
 
-![Nonideal Activities](nonideal_activity.jpg)
-
+```{r, echo=FALSE}
+include_graphics("nonideal_activity.jpg")
+```
 Positive deviations from ideality reflect clustering of molecules of type 1 with molecules of type 1 (or vice versa for type 2). Essentially like prefers like. Examples include \ch{CO2}-\ch{H2O} mixtures, \ch{CH4}-\ch{H2O} mixtures and \ch{KAlSi3O8}-\ch{NaAlSi3O8} mixtures
 
 Negative deviations from ideality are much less common and reflect perfect distribution of molecules, ordering that is well-defined, essentially checkerboarding. Here like prefers unlike. The only real example in geology is dolomite and calcite.
