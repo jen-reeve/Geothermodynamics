@@ -2034,6 +2034,62 @@ For positive deviations $a_{i,soln}^{P,T}>X_i$ so $RTlna_{i,soln}^{P,T}<RTlnX_i$
 
 For negative deviations $a_{i,soln}^{P,T}<X_i$ so $RTlna_{i,soln}^{P,T}>RTlnX_i$
 
+## Nov 12 2018
+Consider a 2 component solution (1 and 2) with a fixed pressure and temperature. All the components can be liquids/gases/fluids with $\alpha=1$
+
+```{r, echo=FALSE}
+include_graphics("nonideal_activity.jpg")
+```
+
+For ideal solutions, the distribution of distances between atoms of different types is Gaussian, for positive deviations it is bimodal and for negative deviations it is essentially a peak with no variance at the mean of the ideal solution curve.
+
+Let's look at the limits:
+
+1. Mole fraction approaching 1, aka Raoult's Law
+
+As the mole fraction of a component approaches one, its activity approaches ideality. This is Raoult's Law.
+
+Ideal solution behaviour occurs when $X_i\rightarrow 1$
+
+2. Mole fraction approaching 0, aka Henry's Law
+
+As $X_i\rightarrow 0$ $a_i\rightarrow$ linear function of $X_i$
+
+Using Henry's constant: $a_i\rightarrow k_i X_i$ where $k_i$ is Henry's constant
+
+3. Positive deviations from ideality in real solution leads to a feature of mixtures known as the miscibility gap
+
+As the temperature approaches infinity, all solutions behave ideally. This implies that as we lower the temperature in systems with clustering, a critical point will be crossed and compounds 1 and 2 will start to self segregate.
+
+```{r}
+include_graphics("miscibility_gap.png")
+```
+
+The compositional difference increases as the temperature decreases.
+
+examples: \ch{FeAl2O4 - Fe3O4} (hercynite and magnetite)
+
+\ch{CH4 - H2O} (methane and water)
+
+\ch{NaCl - KCl} (halite and silvite)
+
+Deviations from ideal behaviour:
+
+$\mu^{P,T}_{i,soln}=(\mu_i^\circ)^{P,T}+RTln(a_{i,soln}^{P,T})$
+
+$\mu_{i,igs}^{P,T}=(\mu^\circ_i)^{P,T}+RTln(X_{i,soln})$ because $a^{P,T}_{i,soln}=X_{i,soln}$ in ideal gas solutions
+
+How is activity operationally defined?
+
+$a^{P,T}_{i,soln}\equiv\lambda^{P,T}_{i,soln}X_{i,soln}^{P,T}$ where $\lambda_{i,soln}^{P,T}$ is the activity coefficient
+
+$\mu^{P,T}_{i,soln}=(\mu^\circ_i)^{P,T}+RTln(X_{i,soln})+RTln(\lambda_{i,soln}$ where the lambda term is where all deviations from ideality occurs
+
+$ln(a_{i,soln}^{P,T})=ln(\lambda^{P,T}_{i,soln}X_{i,soln})=ln(X_{i,soln})+ln(\lambda_{i,soln}^{P,T})$
+
+## Nov 14 2018
+
+
 # Definitions
 Component: chemical formula used to describe the composition of a phase
 
